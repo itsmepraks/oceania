@@ -1,0 +1,24 @@
+{
+  "name": "oceania",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "build": "turbo run build",
+    "check": "biome check .",
+    "dev": "turbo run dev",
+    "format": "biome format --write .",
+    "lint": "biome lint package.json pnpm-workspace.yaml turbo.json tsconfig.base.json biome.json apps/registry/app apps/registry/scripts packages/ui/src",
+    "typecheck": "turbo run typecheck",
+    "registry:build": "turbo run registry:build",
+    "verify": "pnpm lint && pnpm typecheck && pnpm registry:build && pnpm --filter @oceania/registry build"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.16",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
