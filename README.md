@@ -9,3 +9,15 @@ the consuming app instead of being hidden inside an opaque package.
 - `packages/ui` — the component library source (React + TypeScript + Tailwind + Radix + CVA)
 - `apps/registry` — Next.js site that hosts the component registry JSON for `npx shadcn add <url>` installs
 
+## Develop
+
+```bash
+pnpm install
+pnpm dev
+```
+
+The registry docs run at:
+
+```bash
+http://localhost:3333
+```
