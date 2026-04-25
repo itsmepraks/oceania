@@ -21,3 +21,15 @@ The registry docs run at:
 ```bash
 http://localhost:3333
 ```
+
+## Verify
+
+```bash
+pnpm lint
+pnpm typecheck
+pnpm registry:build
+pnpm --filter @oceania/registry build
+```
+
+Or run the full local gate:
+
