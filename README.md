@@ -33,3 +33,15 @@ pnpm --filter @oceania/registry build
 
 Or run the full local gate:
 
+```bash
+pnpm verify
+```
+
+## Install From The Local Registry
+
+```bash
+npx shadcn@latest add http://localhost:3333/r/button.json
+npx shadcn@latest add http://localhost:3333/r/input.json
+npx shadcn@latest add http://localhost:3333/r/select.json
+```
+
