@@ -45,3 +45,15 @@ npx shadcn@latest add http://localhost:3333/r/input.json
 npx shadcn@latest add http://localhost:3333/r/select.json
 ```
 
+Components depend on the Oceania token file. If the CLI does not import it
+automatically, add this to the consuming app's global CSS:
+
+```css
+@import "./oceania-tokens.css";
+```
+
+## Design System References
+
+The implementation is guided by shadcn registries, Radix primitives, Tailwind v4
+theme variables, and mature component docs patterns. Notes live in
+`docs/research/design-system-benchmarks.md`.
