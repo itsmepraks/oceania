@@ -1,0 +1,16 @@
+/*
+ * oceania design tokens
+ *
+ * Values sourced directly from the Figma design system variables.
+ * Colors stored as space-separated HSL triplets so they can be consumed via
+ * `hsl(var(--token))` and `hsl(var(--token) / <alpha>)` in component CSS.
+ */
+
+@layer base {
+  :root {
+    /* ─── Spec annotation colors ────────────────────────────────── */
+    --oc-primary-50:  245 86% 98%;   /* #F4F3FE */
+    --oc-primary-200: 243 89% 85%;   /* #B9B6FC */
+    --oc-primary-500: 254 83% 55%;   /* #5F2EEA */
+    --oc-primary-700: 252 82% 35%;   /* #3610A2 */
+
