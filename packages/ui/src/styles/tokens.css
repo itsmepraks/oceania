@@ -63,3 +63,19 @@
     --oc-ring: var(--oc-blue3-500);
 
     --oc-primary: var(--oc-blue3-500);
+    --oc-primary-fg: var(--oc-light);
+    --oc-primary-hover: var(--oc-blue3-900);
+    --oc-primary-active: var(--oc-blue3-active);
+    --oc-primary-disabled: var(--oc-blue3-200);
+    --oc-primary-subtle: var(--oc-blue3-200);
+
+    --oc-destructive: var(--oc-error-500);
+    --oc-destructive-fg: var(--oc-light);
+    --oc-destructive-subtle: var(--oc-error-200);
+
+    --oc-placeholder: var(--oc-text-300);
+    --oc-hint: var(--oc-text-400);
+    --oc-caption: var(--oc-text-500);
+
+    /* ─── Radii ───────────────────────────────────────────────────── */
+    --oc-radius-none: 0px;
