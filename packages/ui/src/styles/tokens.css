@@ -30,3 +30,20 @@
     --oc-blue2-700: 244 90% 50%;     /* #2014ED */
     --oc-blue2-800: 247 84% 43%;     /* #1A10C7 */
 
+    /* ─── Primary 3 (true blue) ───────────────────────────────────── */
+    --oc-blue3-200: 224 100% 90%;    /* #CDD8FF */
+    --oc-blue3-400: 229 100% 73%;    /* #7387FF */
+    --oc-blue3-500: 235 100% 62%;    /* #3B4CFF */
+    --oc-blue3-950: 235 100% 23%;    /* #000A77 */
+    --oc-blue3-900: 238 97% 35%;     /* #030AAF */
+    --oc-blue3-active: 239 99% 42%;  /* #0109D6 */
+
+    /* ─── Text (purple-tinted neutrals) ───────────────────────────── */
+    --oc-text-200: 252 19% 87%;      /* #DBD8E4 — divider/disabled fill */
+    --oc-text-300: 254 19% 77%;      /* #C0BACF — placeholder */
+    --oc-text-400: 254 19% 67%;      /* #A49CBA — hint / caption */
+    --oc-text-500: 254 19% 57%;      /* #887EA5 — secondary body */
+    --oc-text-600: 254 17% 47%;      /* #6E638D — body */
+    --oc-text-800: 254 17% 27%;      /* #3F3951 — primary body */
+    --oc-text-900: 252 18% 17%;      /* #272332 — headings */
+
