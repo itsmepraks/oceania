@@ -47,3 +47,19 @@
     --oc-text-800: 254 17% 27%;      /* #3F3951 — primary body */
     --oc-text-900: 252 18% 17%;      /* #272332 — headings */
 
+    /* ─── Status ──────────────────────────────────────────────────── */
+    --oc-error-200: 0 84% 85%;       /* #F8B9B9 */
+    --oc-error-500: 0 82% 55%;       /* #EA2E2E */
+
+    /* ─── Surface ─────────────────────────────────────────────────── */
+    --oc-light: 0 0% 100%;           /* #FFFFFF — Pure Light */
+
+    /* ─── Semantic aliases ────────────────────────────────────────── */
+    --oc-bg: var(--oc-light);
+    --oc-fg: var(--oc-text-900);
+    --oc-muted: var(--oc-primary-50);
+    --oc-muted-fg: var(--oc-text-500);
+    --oc-border: var(--oc-text-200);
+    --oc-ring: var(--oc-blue3-500);
+
+    --oc-primary: var(--oc-blue3-500);
