@@ -96,3 +96,19 @@
 
     /* ─── Button specs from Figma ───────────────────────────────── */
     --oc-button-radius: 4px;
+    --oc-button-gap-sm: 10px;
+    --oc-button-gap-md: 12px;
+    --oc-button-gap-lg: 12px;
+    --oc-button-px-sm: 20px;
+    --oc-button-py-sm: 10px;
+    --oc-button-px-md: 40px;
+    --oc-button-py-md: 18px;
+    --oc-button-px-lg: 40px;
+    --oc-button-py-lg: 22px;
+    --oc-button-font-sm: 14px;
+    --oc-button-font-md: 16px;
+    --oc-button-font-lg: 18px;
+  }
+
+  .dark {
+    /* Dark surface uses the deepest blues from the brand ramp */
