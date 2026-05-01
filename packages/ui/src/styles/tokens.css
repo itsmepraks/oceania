@@ -112,3 +112,20 @@
 
   .dark {
     /* Dark surface uses the deepest blues from the brand ramp */
+    --oc-bg: var(--oc-text-900);
+    --oc-fg: var(--oc-light);
+    --oc-muted: var(--oc-text-800);
+    --oc-muted-fg: var(--oc-text-400);
+    --oc-border: var(--oc-text-600);
+    --oc-ring: var(--oc-blue2-400);
+
+    --oc-primary: var(--oc-blue2-500);
+    --oc-primary-fg: var(--oc-light);
+    --oc-primary-hover: var(--oc-blue2-400);
+    --oc-primary-active: var(--oc-blue2-200);
+
+    --oc-placeholder: var(--oc-text-500);
+    --oc-hint: var(--oc-text-500);
+    --oc-caption: var(--oc-text-400);
+  }
+}
