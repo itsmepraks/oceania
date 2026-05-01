@@ -79,3 +79,20 @@
 
     /* ─── Radii ───────────────────────────────────────────────────── */
     --oc-radius-none: 0px;
+    --oc-radius-sm: 4px;     /* Figma button corner radius */
+    --oc-radius-md: 4px;     /* default Figma button/input corner radius */
+    --oc-radius-lg: 12px;
+    --oc-radius-full: 9999px;
+
+    /* ─── Typography ──────────────────────────────────────────────── */
+    --oc-font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --oc-font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+    /* ─── Spacing primitives used by inputs ───────────────────────── */
+    --oc-control-h-sm: 32px;
+    --oc-control-h-md: 40px;
+    --oc-control-h-lg: 48px;
+    --oc-control-px: 16px;
+
+    /* ─── Button specs from Figma ───────────────────────────────── */
+    --oc-button-radius: 4px;
