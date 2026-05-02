@@ -29,3 +29,34 @@ const inputRootVariants = cva(
     "focus-within:border-[hsl(var(--oc-blue1-800))]",
     "focus-within:ring-2 focus-within:ring-[hsl(var(--oc-blue1-800)/0.18)]",
     // error → Error/500
+    "aria-[invalid=true]:border-[hsl(var(--oc-error-500))]",
+    "aria-[invalid=true]:focus-within:border-[hsl(var(--oc-error-500))]",
+    "aria-[invalid=true]:focus-within:ring-[hsl(var(--oc-error-500)/0.18)]",
+    // disabled (handled by [data-disabled] from props + native :has(:disabled))
+    "has-[:disabled]:border-[hsl(var(--oc-text-300))]",
+    "has-[:disabled]:text-[hsl(var(--oc-text-300))]",
+    "has-[:disabled]:cursor-not-allowed",
+  ].join(" "),
+  {
+    variants: {
+      shape: {
+        sharp: "rounded-none",
+        cornered: "rounded-[var(--oc-radius-md)]",
+        rounded: "rounded-[var(--oc-radius-full)]",
+      },
+      inputSize: {
+        sm: "h-8 text-sm",
+        md: "h-10 text-sm",
+        lg: "h-12 text-sm",
+      },
+    },
+    defaultVariants: {
+      shape: "cornered",
+      inputSize: "lg",
+    },
+  },
+);
+
+const inputFieldClasses = cn(
+  "peer flex-1 bg-transparent outline-none border-0 p-0",
+  "text-[hsl(var(--oc-text-900))]",
