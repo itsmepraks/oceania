@@ -91,3 +91,34 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       disabled,
       ...props
     },
+    ref,
+  ) => {
+    return (
+      <div
+        className={cn(
+          inputRootVariants({ shape, inputSize }),
+          wrapperClassName,
+        )}
+        aria-invalid={error || undefined}
+        data-disabled={disabled || undefined}
+      >
+        {startIcon ? (
+          <span
+            className="flex h-4 w-4 shrink-0 items-center justify-center text-[hsl(var(--oc-text-500))]"
+            aria-hidden="true"
+          >
+            {startIcon}
+          </span>
+        ) : null}
+        <input
+          ref={ref}
+          disabled={disabled}
+          className={cn(inputFieldClasses, className)}
+          {...props}
+        />
+        {endIcon ? (
+          <span
+            className="flex h-4 w-4 shrink-0 items-center justify-center text-[hsl(var(--oc-text-500))]"
+            aria-hidden="true"
+          >
+            {endIcon}
