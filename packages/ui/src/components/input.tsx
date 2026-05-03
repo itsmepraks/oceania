@@ -60,3 +60,34 @@ const inputRootVariants = cva(
 const inputFieldClasses = cn(
   "peer flex-1 bg-transparent outline-none border-0 p-0",
   "text-[hsl(var(--oc-text-900))]",
+  "placeholder:text-[hsl(var(--oc-text-400))]",
+  "disabled:cursor-not-allowed disabled:text-[hsl(var(--oc-text-300))]",
+  "disabled:placeholder:text-[hsl(var(--oc-text-300))]",
+);
+
+export interface InputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
+    VariantProps<typeof inputRootVariants> {
+  /** Element rendered at the start of the input (icon, prefix). */
+  startIcon?: React.ReactNode;
+  /** Element rendered at the end of the input (icon, action, indicator). */
+  endIcon?: React.ReactNode;
+  /** Marks the field as invalid; applies the Error/500 border + ring. */
+  error?: boolean;
+  /** className for the outer wrapper (border container). */
+  wrapperClassName?: string;
+}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      className,
+      wrapperClassName,
+      shape,
+      inputSize,
+      startIcon,
+      endIcon,
+      error,
+      disabled,
+      ...props
+    },
