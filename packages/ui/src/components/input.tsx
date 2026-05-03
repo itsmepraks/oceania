@@ -122,3 +122,34 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             aria-hidden="true"
           >
             {endIcon}
+          </span>
+        ) : null}
+      </div>
+    );
+  },
+);
+Input.displayName = "Input";
+
+/**
+ * InputField — convenience wrapper that adds a label and optional caption
+ * matching the Figma layout (label above input, caption below, captioned
+ * error in Error/500).
+ */
+export interface InputFieldProps extends InputProps {
+  label?: React.ReactNode;
+  caption?: React.ReactNode;
+  /** Caption shown when error is true. Overrides `caption`. */
+  errorCaption?: React.ReactNode;
+  id?: string;
+}
+
+const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
+  ({ label, caption, errorCaption, error, id, className, ...rest }, ref) => {
+    const reactId = React.useId();
+    const inputId = id ?? reactId;
+    const message = error && errorCaption ? errorCaption : caption;
+
+    return (
+      <div className="flex flex-col gap-2">
+        {label ? (
+          <label
