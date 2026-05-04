@@ -153,3 +153,35 @@ const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
       <div className="flex flex-col gap-2">
         {label ? (
           <label
+            htmlFor={inputId}
+            className="text-sm font-medium text-[hsl(var(--oc-text-800))]"
+          >
+            {label}
+          </label>
+        ) : null}
+        <Input
+          ref={ref}
+          id={inputId}
+          error={error}
+          className={className}
+          {...rest}
+        />
+        {message ? (
+          <p
+            className={cn(
+              "text-xs",
+              error
+                ? "text-[hsl(var(--oc-error-500))]"
+                : "text-[hsl(var(--oc-text-500))]",
+            )}
+          >
+            {message}
+          </p>
+        ) : null}
+      </div>
+    );
+  },
+);
+InputField.displayName = "InputField";
+
+export { Input, InputField, inputRootVariants };
