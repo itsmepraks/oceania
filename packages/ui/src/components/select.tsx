@@ -55,3 +55,32 @@ const SelectTrigger = React.forwardRef<
     <SelectPrimitive.Icon>
       <svg
         viewBox="0 0 16 16"
+        aria-hidden="true"
+        className="h-4 w-4 text-[hsl(var(--oc-text-500))] transition-transform group-data-[state=open]/oc-select:rotate-180"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M4 6l4 4 4-4" />
+      </svg>
+    </SelectPrimitive.Icon>
+  </SelectPrimitive.Trigger>
+));
+SelectTrigger.displayName = "SelectTrigger";
+
+const SelectContent = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
+>(({ className, children, position = "popper", sideOffset = 6, ...props }, ref) => (
+  <SelectPrimitive.Portal>
+    <SelectPrimitive.Content
+      ref={ref}
+      position={position}
+      sideOffset={sideOffset}
+      className={cn(
+        "z-50 overflow-hidden rounded-[var(--oc-radius-md)]",
+        "border border-[hsl(var(--oc-text-200))] bg-[hsl(var(--oc-light))]",
+        "shadow-lg",
+        "data-[state=open]:animate-in data-[state=closed]:animate-out",
