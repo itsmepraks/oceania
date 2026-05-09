@@ -113,3 +113,32 @@ const SelectLabel = React.forwardRef<
 ));
 SelectLabel.displayName = "SelectLabel";
 
+const SelectItem = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
+>(({ className, children, ...props }, ref) => (
+  <SelectPrimitive.Item
+    ref={ref}
+    className={cn(
+      "relative flex w-full cursor-pointer select-none items-center gap-2",
+      "rounded-[var(--oc-radius-sm)] px-3 py-2 text-sm",
+      "text-[hsl(var(--oc-text-800))] outline-none",
+      "focus:bg-[hsl(var(--oc-primary-50))] focus:text-[hsl(var(--oc-text-900))]",
+      "data-[state=checked]:bg-[hsl(var(--oc-primary-50))] data-[state=checked]:text-[hsl(var(--oc-blue1-800))]",
+      "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      className,
+    )}
+    {...props}
+  >
+    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    <SelectPrimitive.ItemIndicator className="ml-auto inline-flex">
+      <svg
+        viewBox="0 0 16 16"
+        aria-hidden="true"
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
