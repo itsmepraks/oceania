@@ -84,3 +84,32 @@ const SelectContent = React.forwardRef<
         "border border-[hsl(var(--oc-text-200))] bg-[hsl(var(--oc-light))]",
         "shadow-lg",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
+        "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+        "min-w-[var(--radix-select-trigger-width)]",
+        className,
+      )}
+      {...props}
+    >
+      <SelectPrimitive.Viewport className="p-1">
+        {children}
+      </SelectPrimitive.Viewport>
+    </SelectPrimitive.Content>
+  </SelectPrimitive.Portal>
+));
+SelectContent.displayName = "SelectContent";
+
+const SelectLabel = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Label>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
+>(({ className, ...props }, ref) => (
+  <SelectPrimitive.Label
+    ref={ref}
+    className={cn(
+      "px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-[hsl(var(--oc-text-500))]",
+      className,
+    )}
+    {...props}
+  />
+));
+SelectLabel.displayName = "SelectLabel";
+
