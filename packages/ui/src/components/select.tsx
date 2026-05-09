@@ -142,3 +142,32 @@ const SelectItem = React.forwardRef<
         strokeLinecap="round"
         strokeLinejoin="round"
       >
+        <path d="M3 8.5l3.5 3.5L13 5" />
+      </svg>
+    </SelectPrimitive.ItemIndicator>
+  </SelectPrimitive.Item>
+));
+SelectItem.displayName = "SelectItem";
+
+const SelectSeparator = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Separator>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
+>(({ className, ...props }, ref) => (
+  <SelectPrimitive.Separator
+    ref={ref}
+    className={cn("my-1 h-px bg-[hsl(var(--oc-text-200))]", className)}
+    {...props}
+  />
+));
+SelectSeparator.displayName = "SelectSeparator";
+
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+};
