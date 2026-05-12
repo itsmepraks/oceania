@@ -61,3 +61,35 @@ const BreadcrumbLink = React.forwardRef<HTMLAnchorElement, BreadcrumbLinkProps>(
   ({ className, asChild, ...props }, ref) => {
     const Comp = asChild ? Slot : "a";
     return (
+      <Comp
+        ref={ref}
+        className={cn(
+          "transition-colors hover:text-[hsl(var(--oc-text-800))]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-blue1-800)/0.35)] rounded",
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
+BreadcrumbLink.displayName = "BreadcrumbLink";
+
+const BreadcrumbPage = React.forwardRef<
+  HTMLSpanElement,
+  React.ComponentPropsWithoutRef<"span">
+>(({ className, ...props }, ref) => (
+  <span
+    ref={ref}
+    aria-current="page"
+    className={cn("text-[hsl(var(--oc-blue1-500))]", className)}
+    {...props}
+  />
+));
+BreadcrumbPage.displayName = "BreadcrumbPage";
+
+const BreadcrumbSeparator = ({
+  children,
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"li">) => (
