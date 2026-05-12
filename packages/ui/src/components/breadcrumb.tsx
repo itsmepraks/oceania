@@ -93,3 +93,35 @@ const BreadcrumbSeparator = ({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"li">) => (
+  <li
+    role="presentation"
+    aria-hidden="true"
+    className={cn("inline-flex text-[hsl(var(--oc-text-400))]", className)}
+    {...props}
+  >
+    {children ?? (
+      <svg
+        viewBox="0 0 16 16"
+        aria-hidden="true"
+        className="h-3.5 w-3.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M6 4l4 4-4 4" />
+      </svg>
+    )}
+  </li>
+);
+BreadcrumbSeparator.displayName = "BreadcrumbSeparator";
+
+export {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+};
