@@ -32,3 +32,37 @@ const Pagination = ({
     className={cn("mx-auto flex w-full justify-center", className)}
     {...props}
   />
+);
+Pagination.displayName = "Pagination";
+
+const PaginationContent = React.forwardRef<
+  HTMLUListElement,
+  React.ComponentPropsWithoutRef<"ul">
+>(({ className, ...props }, ref) => (
+  <ul
+    ref={ref}
+    className={cn("flex flex-row items-center gap-1", className)}
+    {...props}
+  />
+));
+PaginationContent.displayName = "PaginationContent";
+
+const PaginationItem = React.forwardRef<
+  HTMLLIElement,
+  React.ComponentPropsWithoutRef<"li">
+>(({ className, ...props }, ref) => (
+  <li ref={ref} className={cn("", className)} {...props} />
+));
+PaginationItem.displayName = "PaginationItem";
+
+interface PaginationLinkProps extends React.ComponentPropsWithoutRef<"a"> {
+  isActive?: boolean;
+  /** When true, render as a button-like span (e.g. for the current page). */
+  disabled?: boolean;
+}
+
+const PaginationLink = ({
+  className,
+  isActive,
+  disabled,
+  ...props
