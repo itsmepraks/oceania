@@ -66,3 +66,38 @@ const PaginationLink = ({
   isActive,
   disabled,
   ...props
+}: PaginationLinkProps) => (
+  <a
+    aria-current={isActive ? "page" : undefined}
+    aria-disabled={disabled || undefined}
+    className={cn(
+      "inline-flex h-9 min-w-9 items-center justify-center px-2",
+      "rounded-[10px] text-sm font-bold leading-4",
+      "transition-colors",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-blue1-800)/0.35)] focus-visible:ring-offset-1",
+      isActive
+        ? "bg-[hsl(var(--oc-blue1-500))] text-[hsl(var(--oc-light))] hover:bg-[hsl(var(--oc-blue1-700))]"
+        : "text-[hsl(var(--oc-text-500))] hover:text-[hsl(var(--oc-text-800))]",
+      disabled && "pointer-events-none opacity-40",
+      className,
+    )}
+    {...props}
+  />
+);
+PaginationLink.displayName = "PaginationLink";
+
+const ChevronLeft = () => (
+  <svg
+    viewBox="0 0 20 20"
+    aria-hidden="true"
+    className="h-5 w-5"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.75"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M12 5l-5 5 5 5" />
+  </svg>
+);
+
