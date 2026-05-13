@@ -101,3 +101,37 @@ const ChevronLeft = () => (
   </svg>
 );
 
+const ChevronRight = () => (
+  <svg
+    viewBox="0 0 20 20"
+    aria-hidden="true"
+    className="h-5 w-5"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.75"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M8 5l5 5-5 5" />
+  </svg>
+);
+
+const PaginationPrevious = ({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof PaginationLink>) => (
+  <PaginationLink
+    aria-label="Go to previous page"
+    className={cn("min-w-0 gap-1 px-2", className)}
+    {...props}
+  >
+    <ChevronLeft />
+  </PaginationLink>
+);
+PaginationPrevious.displayName = "PaginationPrevious";
+
+const PaginationNext = ({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof PaginationLink>) => (
+  <PaginationLink
