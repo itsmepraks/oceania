@@ -135,3 +135,38 @@ const PaginationNext = ({
   ...props
 }: React.ComponentPropsWithoutRef<typeof PaginationLink>) => (
   <PaginationLink
+    aria-label="Go to next page"
+    className={cn("min-w-0 gap-1 px-2", className)}
+    {...props}
+  >
+    <ChevronRight />
+  </PaginationLink>
+);
+PaginationNext.displayName = "PaginationNext";
+
+const PaginationEllipsis = ({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"span">) => (
+  <span
+    aria-hidden="true"
+    className={cn(
+      "inline-flex h-9 w-9 items-center justify-center text-sm font-semibold text-[hsl(var(--oc-text-500))]",
+      className,
+    )}
+    {...props}
+  >
+    …
+  </span>
+);
+PaginationEllipsis.displayName = "PaginationEllipsis";
+
+export {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationEllipsis,
+};
