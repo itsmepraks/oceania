@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "@oceania/ui/styles/tokens.css";
+
+@theme inline {
+  --color-bg: hsl(var(--oc-bg));
+  --color-fg: hsl(var(--oc-fg));
+  --color-muted: hsl(var(--oc-muted));
+  --color-muted-fg: hsl(var(--oc-muted-fg));
+  --color-border: hsl(var(--oc-border));
+
+  /* Primary (purple) ramp */
+  --color-primary-50: hsl(var(--oc-primary-50));
+  --color-primary-200: hsl(var(--oc-primary-200));
+  --color-primary-500: hsl(var(--oc-primary-500));
+  --color-primary-700: hsl(var(--oc-primary-700));
+
+  /* Primary 1 (royal blue) — used for active/focus states */
+  --color-blue1-500: hsl(var(--oc-blue1-500));
+  --color-blue1-800: hsl(var(--oc-blue1-800));
+
+  /* Text (purple-tinted neutral) ramp */
+  --color-text-300: hsl(var(--oc-text-300));
+  --color-text-400: hsl(var(--oc-text-400));
+  --color-text-500: hsl(var(--oc-text-500));
+  --color-text-600: hsl(var(--oc-text-600));
+  --color-text-800: hsl(var(--oc-text-800));
+  --color-text-900: hsl(var(--oc-text-900));
+
+  --color-error-500: hsl(var(--oc-error-500));
+
+  --font-sans: var(--oc-font-sans);
+  --font-mono: var(--oc-font-mono);
+}
+
+html,
+body {
+  background: hsl(var(--oc-bg));
+  color: hsl(var(--oc-fg));
+  font-family: var(--oc-font-sans);
+}
