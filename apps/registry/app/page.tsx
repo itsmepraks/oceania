@@ -115,3 +115,43 @@ function TokenSwatch({
         </p>
         <p className="text-xs text-[hsl(var(--oc-text-500))]">{usage}</p>
       </div>
+    </div>
+  );
+}
+
+export default function HomePage() {
+  const [checked, setChecked] = React.useState<boolean | "indeterminate">(true);
+  const [tri, setTri] = React.useState<boolean | "indeterminate">(
+    "indeterminate",
+  );
+  const [radio, setRadio] = React.useState("a");
+  const [on, setOn] = React.useState(true);
+  const [slider, setSlider] = React.useState([40]);
+
+  return (
+    <TooltipProvider delayDuration={150}>
+      <main className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <header className="mb-12">
+          <p className="mb-2 text-sm font-semibold text-[hsl(var(--oc-primary))]">
+            Registry-first React components
+          </p>
+          <h1 className="text-4xl font-bold tracking-tight text-[hsl(var(--oc-text-900))]">
+            oceania
+          </h1>
+          <p className="mt-3 max-w-2xl text-[hsl(var(--oc-text-500))]">
+            A shadcn-style design library for React, Next.js, and TypeScript.
+            Install source into your app, keep it editable, and preserve the
+            Oceania tokens from Figma.
+          </p>
+        </header>
+
+        <div className="space-y-10">
+          <Section title="Install">
+            <div className="grid gap-3 md:grid-cols-2">
+              {registryItems.map((item) => (
+                <code
+                  key={item}
+                  className="block break-all rounded-[var(--oc-radius-md)] bg-[hsl(var(--oc-primary-50))] px-3 py-2 font-mono text-xs text-[hsl(var(--oc-blue1-800))]"
+                >
+                  npx shadcn@latest add {registryBase}/{item}.json
+                </code>
