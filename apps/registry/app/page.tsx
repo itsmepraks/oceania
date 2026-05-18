@@ -194,3 +194,42 @@ export default function HomePage() {
                 Disabled
               </Button>
             </div>
+          </Section>
+
+          <Section
+            title="Input — shapes & states"
+            install={`npx shadcn@latest add ${registryBase}/input.json`}
+          >
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              <div className="space-y-3">
+                <p className="text-xs uppercase tracking-wide text-[hsl(var(--oc-text-500))]">
+                  Sharp
+                </p>
+                <Input shape="sharp" placeholder="Label" />
+                <Input shape="sharp" defaultValue="With data" />
+                <Input
+                  shape="sharp"
+                  error
+                  defaultValue="Username doesn't match"
+                />
+                <Input shape="sharp" disabled placeholder="Disabled" />
+              </div>
+              <div className="space-y-3">
+                <p className="text-xs uppercase tracking-wide text-[hsl(var(--oc-text-500))]">
+                  Cornered
+                </p>
+                <Input shape="cornered" placeholder="Label" />
+                <Input shape="cornered" defaultValue="With data" />
+                <Input
+                  shape="cornered"
+                  error
+                  defaultValue="Username doesn't match"
+                />
+                <Input shape="cornered" disabled placeholder="Disabled" />
+              </div>
+              <div className="space-y-3">
+                <p className="text-xs uppercase tracking-wide text-[hsl(var(--oc-text-500))]">
+                  Rounded
+                </p>
+                <Input shape="rounded" placeholder="Label" />
+                <Input shape="rounded" defaultValue="With data" />
