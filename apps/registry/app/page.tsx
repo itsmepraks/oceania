@@ -155,3 +155,42 @@ export default function HomePage() {
                 >
                   npx shadcn@latest add {registryBase}/{item}.json
                 </code>
+              ))}
+            </div>
+          </Section>
+
+          <Section title="Tokens">
+            <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+              {tokenSwatches.map(([name, token, usage]) => (
+                <TokenSwatch
+                  key={token}
+                  name={name}
+                  token={token}
+                  usage={usage}
+                />
+              ))}
+            </div>
+          </Section>
+
+          <Section
+            title="Button — variants"
+            install={`npx shadcn@latest add ${registryBase}/button.json`}
+          >
+            <div className="flex flex-wrap gap-3">
+              <Button variant="primary">Primary</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="lite">Lite</Button>
+              <Button variant="text">Text</Button>
+              <Button variant="destructive">Destructive</Button>
+            </div>
+          </Section>
+
+          <Section title="Button — sizes">
+            <div className="flex flex-wrap items-center gap-3">
+              <Button size="lg">Large</Button>
+              <Button size="md">Medium</Button>
+              <Button size="sm">Small</Button>
+              <Button size="md" disabled>
+                Disabled
+              </Button>
+            </div>
