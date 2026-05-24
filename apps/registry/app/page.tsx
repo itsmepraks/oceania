@@ -233,3 +233,42 @@ export default function HomePage() {
                 </p>
                 <Input shape="rounded" placeholder="Label" />
                 <Input shape="rounded" defaultValue="With data" />
+                <Input
+                  shape="rounded"
+                  error
+                  defaultValue="Username doesn't match"
+                />
+                <Input shape="rounded" disabled placeholder="Disabled" />
+              </div>
+            </div>
+          </Section>
+
+          <Section title="InputField — with label + caption">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <InputField
+                label="Email"
+                placeholder="you@example.com"
+                caption="We'll never share your email."
+              />
+              <InputField
+                label="Username"
+                defaultValue="jrambo"
+                error
+                errorCaption="Username doesn't match"
+              />
+            </div>
+          </Section>
+
+          <Section title="Textarea">
+            <Textarea placeholder="Write here .." rows={5} />
+          </Section>
+
+          <Section title="Checkbox">
+            <div className="flex flex-wrap items-center gap-6">
+              <div className="flex items-center gap-2 text-sm">
+                <Checkbox
+                  checked={checked}
+                  onCheckedChange={(c) => setChecked(c)}
+                />
+                Selected
+              </div>
