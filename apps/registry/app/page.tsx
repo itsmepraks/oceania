@@ -272,3 +272,43 @@ export default function HomePage() {
                 />
                 Selected
               </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Checkbox defaultChecked={false} />
+                Unselected
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Checkbox checked={tri} onCheckedChange={(c) => setTri(c)} />
+                Indeterminate
+              </div>
+              <div className="flex items-center gap-2 text-sm text-[hsl(var(--oc-text-400))]">
+                <Checkbox disabled />
+                Disabled
+              </div>
+            </div>
+          </Section>
+
+          <Section title="Radio">
+            <RadioGroup
+              value={radio}
+              onValueChange={setRadio}
+              className="flex flex-wrap gap-6"
+            >
+              <div className="flex items-center gap-2 text-sm">
+                <RadioGroupItem value="a" />
+                Option A
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <RadioGroupItem value="b" />
+                Option B
+              </div>
+              <div className="flex items-center gap-2 text-sm text-[hsl(var(--oc-text-400))]">
+                <RadioGroupItem value="c" disabled />
+                Disabled
+              </div>
+            </RadioGroup>
+          </Section>
+
+          <Section title="Switch">
+            <div className="flex flex-wrap items-center gap-6">
+              <div className="flex items-center gap-2 text-sm">
+                <Switch checked={on} onCheckedChange={setOn} />
