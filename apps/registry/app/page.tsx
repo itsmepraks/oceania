@@ -312,3 +312,42 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center gap-6">
               <div className="flex items-center gap-2 text-sm">
                 <Switch checked={on} onCheckedChange={setOn} />
+                Filled
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Switch tone="outlined" defaultChecked />
+                Outlined
+              </div>
+              <div className="flex items-center gap-2 text-sm text-[hsl(var(--oc-text-400))]">
+                <Switch disabled />
+                Disabled
+              </div>
+            </div>
+          </Section>
+
+          <Section title="Slider">
+            <div className="space-y-6 pt-8">
+              <Slider
+                value={slider}
+                onValueChange={setSlider}
+                min={0}
+                max={100}
+                step={1}
+                showValue
+                formatValue={(v) => `${v}%`}
+              />
+            </div>
+          </Section>
+
+          <Section
+            title="Select"
+            install={`npx shadcn@latest add ${registryBase}/select.json`}
+          >
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <Select defaultValue="option-2">
+                <SelectTrigger>
+                  <SelectValue placeholder="Pick an option" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="option-1">Option 1</SelectItem>
+                  <SelectItem value="option-2">Option 2</SelectItem>
