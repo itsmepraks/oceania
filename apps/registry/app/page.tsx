@@ -429,3 +429,43 @@ export default function HomePage() {
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink href="#">2</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">3</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">22</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext href="#" />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </Section>
+
+          <Section title="Tooltip">
+            <div className="flex flex-wrap items-center gap-6">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="secondary">Hover me</Button>
+                </TooltipTrigger>
+                <TooltipContent>I guide users through the product</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="text">Or me</Button>
+                </TooltipTrigger>
+                <TooltipContent side="right">
+                  Right-side tooltip
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          </Section>
+        </div>
+      </main>
+    </TooltipProvider>
+  );
+}
