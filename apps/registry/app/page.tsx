@@ -351,3 +351,42 @@ export default function HomePage() {
                 <SelectContent>
                   <SelectItem value="option-1">Option 1</SelectItem>
                   <SelectItem value="option-2">Option 2</SelectItem>
+                  <SelectItem value="option-3">Option 3</SelectItem>
+                  <SelectItem value="option-4">Option 4</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select>
+                <SelectTrigger shape="rounded">
+                  <SelectValue placeholder="Rounded shape" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="orange">Orange</SelectItem>
+                  <SelectItem value="grape">Grape</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </Section>
+
+          <Section title="Tabs">
+            <Tabs defaultValue="overview">
+              <TabsList>
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="settings">Settings</TabsTrigger>
+                <TabsTrigger value="activity">Activity</TabsTrigger>
+              </TabsList>
+              <TabsContent value="overview">
+                <p className="text-sm text-[hsl(var(--oc-text-600))]">
+                  Active tab uses Primary 2/500. Inactive triggers stay in
+                  Text/500 and lift to Text/800 on hover.
+                </p>
+              </TabsContent>
+              <TabsContent value="settings">
+                <p className="text-sm text-[hsl(var(--oc-text-600))]">
+                  Settings panel.
+                </p>
+              </TabsContent>
+              <TabsContent value="activity">
+                <p className="text-sm text-[hsl(var(--oc-text-600))]">
+                  Recent activity.
+                </p>
