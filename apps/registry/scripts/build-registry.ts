@@ -38,3 +38,23 @@ const ui = (
   filename: string,
   dependencies: string[],
   title: string,
+  description: string,
+): RegistryItem => ({
+  $schema: SCHEMA,
+  name,
+  type: "registry:ui",
+  title,
+  description,
+  dependencies,
+  registryDependencies: [
+    `${REGISTRY_BASE_URL}/utils.json`,
+    `${REGISTRY_BASE_URL}/tokens.json`,
+  ],
+  docs: "Import `app/oceania-tokens.css` from your global stylesheet if the CLI does not add it automatically.",
+  files: [
+    {
+      path: `components/ui/${filename}`,
+      content: read(`components/${filename}`),
+      type: "registry:ui",
+      target: `@ui/${filename}`,
+    },
