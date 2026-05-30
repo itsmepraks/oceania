@@ -18,3 +18,23 @@ interface RegistryItem {
   name: string;
   type: "registry:ui" | "registry:lib" | "registry:style";
   title?: string;
+  description?: string;
+  dependencies?: string[];
+  registryDependencies?: string[];
+  docs?: string;
+  files: { path: string; content: string; type: string; target?: string }[];
+}
+
+const SCHEMA = "https://ui.shadcn.com/schema/registry-item.json";
+
+const read = (rel: string) =>
+  readFileSync(join(uiDir, rel), "utf8").replace(
+    /from "\.\.\/lib\/utils"/g,
+    'from "@/lib/utils"',
+  );
+
+const ui = (
+  name: string,
+  filename: string,
+  dependencies: string[],
+  title: string,
