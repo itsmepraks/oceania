@@ -58,3 +58,23 @@ const ui = (
       type: "registry:ui",
       target: `@ui/${filename}`,
     },
+  ],
+});
+
+const items: RegistryItem[] = [
+  {
+    $schema: SCHEMA,
+    name: "utils",
+    type: "registry:lib",
+    title: "Utilities",
+    description: "Shared className merge helper for Oceania components.",
+    dependencies: ["clsx", "tailwind-merge"],
+    files: [
+      {
+        path: "lib/utils.ts",
+        content: readFileSync(join(uiDir, "lib", "utils.ts"), "utf8"),
+        type: "registry:lib",
+        target: "@lib/utils.ts",
+      },
+    ],
+  },
