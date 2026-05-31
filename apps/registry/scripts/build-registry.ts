@@ -78,3 +78,23 @@ const items: RegistryItem[] = [
       },
     ],
   },
+  {
+    $schema: SCHEMA,
+    name: "tokens",
+    type: "registry:style",
+    title: "Oceania tokens",
+    description: "Figma-sourced Oceania CSS variables for color, typography, radii, and control sizing.",
+    docs: "Add `@import \"./oceania-tokens.css\";` to your app/global stylesheet after installing.",
+    files: [
+      {
+        path: "styles/oceania-tokens.css",
+        content: readFileSync(join(uiDir, "styles", "tokens.css"), "utf8"),
+        type: "registry:style",
+        target: "app/oceania-tokens.css",
+      },
+    ],
+  },
+  ui("button", "button.tsx", [
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+  ], "Button", "Primary, secondary, lite, text, and destructive button variants."),
