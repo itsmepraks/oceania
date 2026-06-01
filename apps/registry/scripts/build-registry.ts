@@ -118,3 +118,24 @@ const items: RegistryItem[] = [
 ];
 
 mkdirSync(outDir, { recursive: true });
+
+for (const item of items) {
+  const outPath = join(outDir, `${item.name}.json`);
+  writeFileSync(outPath, JSON.stringify(item, null, 2));
+  console.log(`✓ wrote ${outPath.replace(`${root}/`, "")}`);
+}
+
+const index = {
+  $schema: "https://ui.shadcn.com/schema/registry.json",
+  name: "oceania",
+  homepage: REGISTRY_BASE_URL.replace(/\/r$/, ""),
+  items: items.map((i) => ({
+    name: i.name,
+    type: i.type,
+    title: i.title,
+    description: i.description,
+  })),
+};
+writeFileSync(join(outDir, "registry.json"), JSON.stringify(index, null, 2));
+console.log(`✓ wrote ${join(outDir, "registry.json").replace(`${root}/`, "")}`);
+console.log(`\nDone. ${items.length} registry items generated.`);
