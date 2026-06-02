@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "type": "registry:ui",
+  "title": "Textarea",
+  "description": "Multi-line text input with Oceania borders and states.",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "http://localhost:3333/r/utils.json",
+    "http://localhost:3333/r/tokens.json"
+  ],
+  "docs": "Import `app/oceania-tokens.css` from your global stylesheet if the CLI does not add it automatically.",
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Textarea — multi-line text input. Shares the same border/focus/error\n * grammar as Input (Text/400 default → Text/600 hover → Primary 1/800 focus\n * → Error/500 invalid → Text/300 disabled).\n */\nconst textareaVariants = cva(\n  [\n    \"block w-full resize-y\",\n    \"bg-transparent border border-solid\",\n    \"px-4 py-3\",\n    \"font-[var(--oc-font-sans)] font-medium text-sm\",\n    \"transition-colors\",\n    \"border-[hsl(var(--oc-text-400))] text-[hsl(var(--oc-text-900))]\",\n    \"placeholder:text-[hsl(var(--oc-text-400))]\",\n    \"hover:border-[hsl(var(--oc-text-600))]\",\n    \"focus:outline-none\",\n    \"focus:border-[hsl(var(--oc-blue1-800))]\",\n    \"focus:ring-2 focus:ring-[hsl(var(--oc-blue1-800)/0.18)]\",\n    \"aria-[invalid=true]:border-[hsl(var(--oc-error-500))]\",\n    \"aria-[invalid=true]:focus:border-[hsl(var(--oc-error-500))]\",\n    \"aria-[invalid=true]:focus:ring-[hsl(var(--oc-error-500)/0.18)]\",\n    \"disabled:cursor-not-allowed\",\n    \"disabled:border-[hsl(var(--oc-text-300))]\",\n    \"disabled:text-[hsl(var(--oc-text-300))]\",\n    \"disabled:placeholder:text-[hsl(var(--oc-text-300))]\",\n  ].join(\" \"),\n  {\n    variants: {\n      shape: {\n        sharp: \"rounded-none\",\n        cornered: \"rounded-[var(--oc-radius-md)]\",\n        rounded: \"rounded-[var(--oc-radius-lg)]\",\n      },\n    },\n    defaultVariants: {\n      shape: \"cornered\",\n    },\n  },\n);\n\nexport interface TextareaProps\n  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,\n    VariantProps<typeof textareaVariants> {\n  error?: boolean;\n}\n\nconst Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(\n  ({ className, shape, error, rows = 4, ...props }, ref) => {\n    return (\n      <textarea\n        ref={ref}\n        rows={rows}\n        aria-invalid={error || undefined}\n        className={cn(textareaVariants({ shape }), className)}\n        {...props}\n      />\n    );\n  },\n);\nTextarea.displayName = \"Textarea\";\n\nexport { Textarea, textareaVariants };\n",
+      "type": "registry:ui",
+      "target": "@ui/textarea.tsx"
+    }
+  ]
+}
