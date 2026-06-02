@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radio-group",
+  "type": "registry:ui",
+  "title": "Radio group",
+  "description": "Accessible radio group and radio item primitives.",
+  "dependencies": [
+    "@radix-ui/react-radio-group"
+  ],
+  "registryDependencies": [
+    "http://localhost:3333/r/utils.json",
+    "http://localhost:3333/r/tokens.json"
+  ],
+  "docs": "Import `app/oceania-tokens.css` from your global stylesheet if the CLI does not add it automatically.",
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as RadioGroupPrimitive from \"@radix-ui/react-radio-group\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * RadioGroup / RadioGroupItem — Radix RadioGroup themed for oceania.\n *\n * Figma states (24×24 circle):\n *   • Default (on)  → border + inner dot in Primary 1/500\n *   • Off           → border Text/400, no dot\n *   • Disabled      → border + dot Text/300\n */\nconst RadioGroup = React.forwardRef<\n  React.ElementRef<typeof RadioGroupPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <RadioGroupPrimitive.Root\n    ref={ref}\n    className={cn(\"grid gap-3\", className)}\n    {...props}\n  />\n));\nRadioGroup.displayName = \"RadioGroup\";\n\nconst RadioGroupItem = React.forwardRef<\n  React.ElementRef<typeof RadioGroupPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>\n>(({ className, ...props }, ref) => (\n  <RadioGroupPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"inline-flex h-6 w-6 shrink-0 items-center justify-center\",\n      \"rounded-full border border-solid\",\n      \"border-[hsl(var(--oc-text-400))] bg-transparent\",\n      \"transition-colors\",\n      \"hover:border-[hsl(var(--oc-text-600))]\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-blue1-800)/0.35)]\",\n      \"data-[state=checked]:border-[hsl(var(--oc-blue1-500))]\",\n      \"disabled:cursor-not-allowed disabled:border-[hsl(var(--oc-text-300))]\",\n      className,\n    )}\n    {...props}\n  >\n    <RadioGroupPrimitive.Indicator className=\"flex items-center justify-center\">\n      <span\n        aria-hidden=\"true\"\n        className={cn(\n          \"block h-3 w-3 rounded-full\",\n          \"bg-[hsl(var(--oc-blue1-500))]\",\n          \"[[data-disabled]_&]:bg-[hsl(var(--oc-text-300))]\",\n        )}\n      />\n    </RadioGroupPrimitive.Indicator>\n  </RadioGroupPrimitive.Item>\n));\nRadioGroupItem.displayName = \"RadioGroupItem\";\n\nexport { RadioGroup, RadioGroupItem };\n",
+      "type": "registry:ui",
+      "target": "@ui/radio-group.tsx"
+    }
+  ]
+}
