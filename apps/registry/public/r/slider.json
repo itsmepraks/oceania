@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slider",
+  "type": "registry:ui",
+  "title": "Slider",
+  "description": "Single or range slider with optional value bubble.",
+  "dependencies": [
+    "@radix-ui/react-slider"
+  ],
+  "registryDependencies": [
+    "http://localhost:3333/r/utils.json",
+    "http://localhost:3333/r/tokens.json"
+  ],
+  "docs": "Import `app/oceania-tokens.css` from your global stylesheet if the CLI does not add it automatically.",
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SliderPrimitive from \"@radix-ui/react-slider\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Slider — Radix Slider primitive themed for oceania.\n *\n * Figma states:\n *   • Initial → 4px track Text/200, range Primary 1/500, 16px thumb\n *   • Hover   → thumb grows + adds soft ring (Primary 1/500 / 0.18)\n *   • Sliding → thumb shows a small bubble with the current value\n *\n * Pass `showValue` to render the value bubble above the active thumb.\n * Supports single or range selection via Radix's `value` / `defaultValue`.\n */\nexport interface SliderProps\n  extends React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root> {\n  /** Render a value bubble above each thumb. */\n  showValue?: boolean;\n  /** Formatter for the value bubble. Defaults to `String(value)`. */\n  formatValue?: (value: number) => string;\n}\n\nconst Slider = React.forwardRef<\n  React.ElementRef<typeof SliderPrimitive.Root>,\n  SliderProps\n>(({ className, showValue, formatValue, value, defaultValue, ...props }, ref) => {\n  // Track current values so the bubble can render the right number per thumb.\n  const initial = (value ?? defaultValue ?? [0]) as number[];\n  const [internal, setInternal] = React.useState<number[]>(initial);\n  const current = (value as number[] | undefined) ?? internal;\n\n  return (\n    <SliderPrimitive.Root\n      ref={ref}\n      value={value}\n      defaultValue={defaultValue}\n      onValueChange={(next) => {\n        setInternal(next);\n        props.onValueChange?.(next);\n      }}\n      className={cn(\n        \"relative flex w-full touch-none select-none items-center\",\n        \"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-60\",\n        className,\n      )}\n      {...props}\n    >\n      <SliderPrimitive.Track\n        className={cn(\n          \"relative h-1 w-full grow overflow-hidden rounded-full\",\n          \"bg-[hsl(var(--oc-text-200))]\",\n        )}\n      >\n        <SliderPrimitive.Range className=\"absolute h-full bg-[hsl(var(--oc-blue2-500))] data-[disabled]:bg-[hsl(var(--oc-text-300))]\" />\n      </SliderPrimitive.Track>\n\n      {current.map((v, i) => (\n        <SliderPrimitive.Thumb\n          key={`thumb-${v}`}\n          className={cn(\n            \"relative block h-4 w-4 rounded-full\",\n            \"border-2 border-[hsl(var(--oc-blue1-500))] bg-[hsl(var(--oc-blue1-100))]\",\n            \"shadow-sm transition-transform\",\n            \"hover:scale-110 hover:border-[hsl(var(--oc-blue2-700))] hover:ring-4 hover:ring-[hsl(var(--oc-blue1-500)/0.18)]\",\n            \"focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[hsl(var(--oc-blue1-500)/0.25)]\",\n            \"data-[disabled]:border-[hsl(var(--oc-text-300))] data-[disabled]:bg-[hsl(var(--oc-text-200))]\",\n          )}\n          aria-label={`Value ${i + 1}`}\n        >\n          {showValue ? (\n            <span\n              className={cn(\n                \"pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2\",\n                \"inline-flex min-w-10 justify-center rounded-[var(--oc-radius-sm)] px-2 py-1 text-xs font-medium\",\n                \"bg-[hsl(var(--oc-blue2-400))] text-[hsl(var(--oc-blue1-800))]\",\n                \"whitespace-nowrap shadow\",\n              )}\n            >\n              {formatValue ? formatValue(v) : String(v)}\n            </span>\n          ) : null}\n        </SliderPrimitive.Thumb>\n      ))}\n    </SliderPrimitive.Root>\n  );\n});\nSlider.displayName = \"Slider\";\n\nexport { Slider };\n",
+      "type": "registry:ui",
+      "target": "@ui/slider.tsx"
+    }
+  ]
+}
