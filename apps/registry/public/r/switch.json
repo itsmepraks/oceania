@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "type": "registry:ui",
+  "title": "Switch",
+  "description": "Filled and outlined toggle controls.",
+  "dependencies": [
+    "@radix-ui/react-switch",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "http://localhost:3333/r/utils.json",
+    "http://localhost:3333/r/tokens.json"
+  ],
+  "docs": "Import `app/oceania-tokens.css` from your global stylesheet if the CLI does not add it automatically.",
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Switch — Radix Switch primitive themed for oceania.\n *\n * Figma exposes two toggle styles:\n *   • Filled (default) → track flips Text/300 → Primary 1/500\n *   • Outlined         → 1px border track; thumb is the colored element\n *\n * Track is 32×16, thumb 12×12 with 2px inset.\n */\nconst switchVariants = cva(\n  [\n    \"peer inline-flex h-4 w-8 shrink-0 cursor-pointer items-center\",\n    \"rounded-full border-2 border-transparent\",\n    \"transition-colors\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-blue1-800)/0.35)]\",\n    \"disabled:cursor-not-allowed disabled:opacity-60\",\n  ].join(\" \"),\n  {\n    variants: {\n      tone: {\n        filled: cn(\n          \"bg-[hsl(var(--oc-text-200))]\",\n          \"data-[state=checked]:bg-[hsl(var(--oc-blue2-400))]\",\n          \"disabled:data-[state=checked]:bg-[hsl(var(--oc-text-300))]\",\n        ),\n        outlined: cn(\n          \"bg-transparent border-[hsl(var(--oc-text-300))]\",\n          \"data-[state=checked]:border-[hsl(var(--oc-blue1-500))]\",\n          \"disabled:border-[hsl(var(--oc-text-300))]\",\n        ),\n      },\n    },\n    defaultVariants: {\n      tone: \"filled\",\n    },\n  },\n);\n\nconst switchThumbVariants = cva(\n  [\n    \"pointer-events-none block h-3 w-3 rounded-full\",\n    \"shadow ring-0 transition-transform\",\n    \"data-[state=unchecked]:translate-x-0\",\n    \"data-[state=checked]:translate-x-4\",\n  ].join(\" \"),\n  {\n    variants: {\n      tone: {\n        filled: cn(\n          \"bg-[hsl(var(--oc-text-300))]\",\n          \"data-[state=checked]:bg-[hsl(var(--oc-blue1-500))]\",\n        ),\n        outlined: cn(\n          \"bg-[hsl(var(--oc-text-300))]\",\n          \"data-[state=checked]:bg-[hsl(var(--oc-blue1-500))]\",\n        ),\n      },\n    },\n    defaultVariants: {\n      tone: \"filled\",\n    },\n  },\n);\n\nexport interface SwitchProps\n  extends React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>,\n    VariantProps<typeof switchVariants> {}\n\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  SwitchProps\n>(({ className, tone, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    ref={ref}\n    className={cn(switchVariants({ tone }), className)}\n    {...props}\n  >\n    <SwitchPrimitive.Thumb className={switchThumbVariants({ tone })} />\n  </SwitchPrimitive.Root>\n));\nSwitch.displayName = \"Switch\";\n\nexport { Switch, switchVariants };\n",
+      "type": "registry:ui",
+      "target": "@ui/switch.tsx"
+    }
+  ]
+}
