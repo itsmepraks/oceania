@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "type": "registry:ui",
+  "title": "Tabs",
+  "description": "Horizontal and vertical tab primitives.",
+  "dependencies": [
+    "@radix-ui/react-tabs",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "http://localhost:3333/r/utils.json",
+    "http://localhost:3333/r/tokens.json"
+  ],
+  "docs": "Import `app/oceania-tokens.css` from your global stylesheet if the CLI does not add it automatically.",
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Tabs — Radix Tabs themed for oceania.\n *\n * Figma exposes a horizontal underline style (default) and a vertical style.\n * Active trigger uses Primary 2/500 (#4A4CFF), inactive uses Text/500.\n * A 2px underline sits under the active trigger; the full row gets a\n * 1px Text/200 baseline so inactive triggers visually share a line.\n *\n *   <Tabs defaultValue=\"a\">\n *     <TabsList>\n *       <TabsTrigger value=\"a\">Tab 1</TabsTrigger>\n *       <TabsTrigger value=\"b\">Tab 2</TabsTrigger>\n *     </TabsList>\n *     <TabsContent value=\"a\">…</TabsContent>\n *   </Tabs>\n */\nconst Tabs = TabsPrimitive.Root;\n\nconst tabsListVariants = cva(\"flex\", {\n  variants: {\n    orientation: {\n      horizontal: \"border-b border-[hsl(var(--oc-text-200))] gap-6\",\n      vertical: \"flex-col border-r border-[hsl(var(--oc-text-200))] gap-3\",\n    },\n  },\n  defaultVariants: { orientation: \"horizontal\" },\n});\n\nconst TabsList = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.List>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List> &\n    VariantProps<typeof tabsListVariants>\n>(({ className, orientation, ...props }, ref) => (\n  <TabsPrimitive.List\n    ref={ref}\n    className={cn(tabsListVariants({ orientation }), className)}\n    {...props}\n  />\n));\nTabsList.displayName = \"TabsList\";\n\nconst TabsTrigger = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Trigger>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Trigger\n    ref={ref}\n    className={cn(\n      \"relative inline-flex items-center justify-center\",\n      \"px-1 pb-3 pt-1\",\n      \"text-sm font-semibold leading-4\",\n      \"text-[hsl(var(--oc-text-500))]\",\n      \"transition-colors\",\n      \"hover:text-[hsl(var(--oc-text-800))]\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-blue1-800)/0.35)] focus-visible:ring-offset-2\",\n      \"disabled:pointer-events-none disabled:opacity-50\",\n      // active state\n      \"data-[state=active]:text-[hsl(var(--oc-blue2-500))]\",\n      // 2px underline tied to the bottom of the list border\n      \"after:absolute after:left-0 after:right-0 after:-bottom-px after:h-[2px]\",\n      \"after:bg-transparent data-[state=active]:after:bg-[hsl(var(--oc-blue2-500))]\",\n      // vertical orientation flips the indicator to the right edge\n      \"data-[orientation=vertical]:after:left-auto data-[orientation=vertical]:after:right-[-1px]\",\n      \"data-[orientation=vertical]:after:top-0 data-[orientation=vertical]:after:bottom-0\",\n      \"data-[orientation=vertical]:after:h-auto data-[orientation=vertical]:after:w-[2px]\",\n      \"data-[orientation=vertical]:pr-3 data-[orientation=vertical]:pl-1 data-[orientation=vertical]:py-2\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsTrigger.displayName = \"TabsTrigger\";\n\nconst TabsContent = React.forwardRef<\n  React.ElementRef<typeof TabsPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>\n>(({ className, ...props }, ref) => (\n  <TabsPrimitive.Content\n    ref={ref}\n    className={cn(\n      \"mt-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-blue1-800)/0.35)] rounded\",\n      className,\n    )}\n    {...props}\n  />\n));\nTabsContent.displayName = \"TabsContent\";\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n",
+      "type": "registry:ui",
+      "target": "@ui/tabs.tsx"
+    }
+  ]
+}
