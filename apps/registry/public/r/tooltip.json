@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "type": "registry:ui",
+  "title": "Tooltip",
+  "description": "Radix tooltip styled with Oceania dark blue surface.",
+  "dependencies": [
+    "@radix-ui/react-tooltip"
+  ],
+  "registryDependencies": [
+    "http://localhost:3333/r/utils.json",
+    "http://localhost:3333/r/tokens.json"
+  ],
+  "docs": "Import `app/oceania-tokens.css` from your global stylesheet if the CLI does not add it automatically.",
+  "files": [
+    {
+      "path": "components/ui/tooltip.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as TooltipPrimitive from \"@radix-ui/react-tooltip\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Tooltip — Radix Tooltip themed for oceania.\n *\n * Figma uses Primary 3/950 (#000A77) as the bubble bg with white 12px text,\n * 5px rounded corners, and a small triangle arrow.\n *\n *   <TooltipProvider>\n *     <Tooltip>\n *       <TooltipTrigger>Hover me</TooltipTrigger>\n *       <TooltipContent>I guide users through the product</TooltipContent>\n *     </Tooltip>\n *   </TooltipProvider>\n */\nconst TooltipProvider = TooltipPrimitive.Provider;\nconst Tooltip = TooltipPrimitive.Root;\nconst TooltipTrigger = TooltipPrimitive.Trigger;\n\nconst TooltipContent = React.forwardRef<\n  React.ElementRef<typeof TooltipPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>\n>(({ className, sideOffset = 6, children, ...props }, ref) => (\n  <TooltipPrimitive.Portal>\n    <TooltipPrimitive.Content\n      ref={ref}\n      sideOffset={sideOffset}\n      className={cn(\n        \"z-50 max-w-xs rounded-[5px] px-3 py-1.5\",\n        \"bg-[hsl(var(--oc-blue3-950))] text-[hsl(var(--oc-light))]\",\n        \"text-xs font-medium leading-4\",\n        \"shadow-lg\",\n        \"data-[state=delayed-open]:animate-in data-[state=closed]:animate-out\",\n        \"data-[state=closed]:fade-out-0 data-[state=delayed-open]:fade-in-0\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      <TooltipPrimitive.Arrow\n        width={12}\n        height={6}\n        className=\"fill-[hsl(var(--oc-blue3-950))]\"\n      />\n    </TooltipPrimitive.Content>\n  </TooltipPrimitive.Portal>\n));\nTooltipContent.displayName = \"TooltipContent\";\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };\n",
+      "type": "registry:ui",
+      "target": "@ui/tooltip.tsx"
+    }
+  ]
+}
