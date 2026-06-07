@@ -11,3 +11,9 @@ and easy to inspect.
 - shadcn registry index schema: https://ui.shadcn.com/docs/registry/registry-json
 - Radix primitives: https://www.radix-ui.com/primitives/docs
 - Radix composition and `asChild`: https://www.radix-ui.com/primitives/docs/guides/composition
+- Radix accessibility guidance: https://www.radix-ui.com/primitives/docs/overview/accessibility
+- Tailwind v4 theme variables: https://tailwindcss.com/docs/theme
+- Storybook component documentation patterns: https://storybook.js.org/docs
+
+## Decisions For Oceania
+
