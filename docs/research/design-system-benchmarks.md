@@ -17,3 +17,10 @@ and easy to inspect.
 
 ## Decisions For Oceania
 
+- Prefer Radix primitives for controls with interaction or keyboard semantics.
+- Preserve `asChild` where composition matters, especially buttons, links, tooltips,
+  and breadcrumb links.
+- Keep tokens in CSS custom properties and expose Tailwind v4 `@theme` aliases in
+  the docs app.
+- Show install command, variants, states, and usage for every V1 component.
+- Treat Figma as the source of visual truth, but keep implementation idiomatic React.
