@@ -38,3 +38,8 @@ body {
   color: hsl(var(--oc-fg));
   font-family: var(--oc-font-sans);
 }
+
+:root {
+  --oc-font-sans: var(--font-manrope);
+  --oc-font-mono: var(--font-jetbrains-mono);
+}
