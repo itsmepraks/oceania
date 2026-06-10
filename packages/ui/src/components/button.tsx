@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-[var(--oc-button-radius)] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-ring))] focus-visible:ring-offset-2 disabled:pointer-events-none",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-[var(--oc-button-radius)] font-medium transition-[transform,background-color,border-color,color,opacity] duration-150 ease-out active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-ring))] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:active:scale-100",
   {
     variants: {
       variant: {
@@ -12,10 +12,8 @@ const buttonVariants = cva(
           "bg-[hsl(var(--oc-primary))] text-[hsl(var(--oc-primary-fg))] hover:bg-[hsl(var(--oc-primary-hover))] active:bg-[hsl(var(--oc-primary-active))] disabled:bg-[hsl(var(--oc-primary-disabled))] disabled:text-white",
         secondary:
           "border border-[hsl(var(--oc-primary))] bg-transparent text-[hsl(var(--oc-primary))] hover:border-[hsl(var(--oc-primary-hover))] hover:text-[hsl(var(--oc-primary-hover))] active:border-[hsl(var(--oc-primary-active))] disabled:border-[hsl(var(--oc-primary-disabled))] disabled:text-[hsl(var(--oc-primary-disabled))]",
-        lite:
-          "border border-[hsl(var(--oc-primary-subtle))] bg-transparent text-[hsl(var(--oc-primary))] hover:text-[hsl(var(--oc-primary-hover))] disabled:text-[hsl(var(--oc-primary-disabled))]",
-        text:
-          "bg-transparent text-[hsl(var(--oc-primary))] hover:text-[hsl(var(--oc-primary-hover))] disabled:text-[hsl(var(--oc-primary-disabled))]",
+        lite: "border border-[hsl(var(--oc-primary-subtle))] bg-transparent text-[hsl(var(--oc-primary))] hover:text-[hsl(var(--oc-primary-hover))] disabled:text-[hsl(var(--oc-primary-disabled))]",
+        text: "bg-transparent text-[hsl(var(--oc-primary))] hover:text-[hsl(var(--oc-primary-hover))] disabled:text-[hsl(var(--oc-primary-disabled))]",
         destructive:
           "bg-[hsl(var(--oc-destructive))] text-[hsl(var(--oc-destructive-fg))] hover:opacity-90",
       },

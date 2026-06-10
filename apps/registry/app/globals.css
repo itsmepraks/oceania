@@ -37,9 +37,21 @@ body {
   background: hsl(var(--oc-bg));
   color: hsl(var(--oc-fg));
   font-family: var(--oc-font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 :root {
   --oc-font-sans: var(--font-manrope);
   --oc-font-mono: var(--font-jetbrains-mono);
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }

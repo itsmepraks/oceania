@@ -270,7 +270,7 @@ function LabHero() {
                       index < 2 ? "border-r border-[hsl(var(--oc-text-900))] p-4" : "p-4"
                     }
                   >
-                    <p className="font-mono text-3xl font-bold text-[hsl(var(--oc-text-900))]">
+                    <p className="font-mono text-3xl font-bold tabular-nums text-[hsl(var(--oc-text-900))]">
                       {value}
                     </p>
                     <p className="mt-1 text-xs uppercase text-[hsl(var(--oc-text-600))]">
@@ -308,7 +308,9 @@ function LabHero() {
                         className="border border-[hsl(var(--oc-light))] p-3"
                       >
                         <p className="text-xs text-[hsl(var(--oc-text-400))]">{label}</p>
-                        <p className="mt-1 text-2xl font-semibold">{value}</p>
+                        <p className="mt-1 text-2xl font-semibold tabular-nums">
+                          {value}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -667,7 +669,7 @@ export default function HomePage() {
                   showValue
                   formatValue={(value) => `${value}%`}
                 />
-                <div className="inline-flex border border-[hsl(var(--oc-text-900))] bg-white px-3 py-2 font-mono text-xs font-bold">
+                <div className="inline-flex border border-[hsl(var(--oc-text-900))] bg-white px-3 py-2 font-mono text-xs font-bold tabular-nums">
                   CURRENT ALLOCATION: {slider[0]}%
                 </div>
               </div>
