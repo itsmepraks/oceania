@@ -21,3 +21,11 @@ pnpm dlx shadcn@latest add \
 The CLI installs `app/oceania-tokens.css`. The consuming app must import it from
 global CSS:
 
+```css
+@import "./oceania-tokens.css";
+```
+
+## Result
+
+The app builds successfully with installed `Button`, `Input`, `InputField`, and
+`Select` components.
