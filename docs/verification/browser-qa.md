@@ -10,3 +10,9 @@ Desktop check:
 
 - Page loaded successfully.
 - No console errors on clean load.
+- Install commands and token cards rendered.
+- No detected horizontal overflow.
+
+Mobile check:
+
+- Viewport: `390 x 844`.
