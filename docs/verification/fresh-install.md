@@ -13,3 +13,11 @@ pnpm dlx shadcn@latest add \
   http://localhost:3333/r/button.json \
   http://localhost:3333/r/input.json \
   http://localhost:3333/r/select.json \
+  --yes --overwrite
+```
+
+## Required Consumer Step
+
+The CLI installs `app/oceania-tokens.css`. The consuming app must import it from
+global CSS:
+
