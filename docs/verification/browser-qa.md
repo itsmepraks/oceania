@@ -16,3 +16,10 @@ Desktop check:
 Mobile check:
 
 - Viewport: `390 x 844`.
+- Page loaded successfully after restarting the dev server following production build.
+- No detected horizontal overflow.
+
+## Notes
+
+Running `next build` while `next dev` is active can leave the dev server with stale
+`.next` artifacts. Restart the dev server after production builds before visual QA.
