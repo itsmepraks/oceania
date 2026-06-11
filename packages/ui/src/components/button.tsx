@@ -9,7 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-[hsl(var(--oc-primary))] text-[hsl(var(--oc-primary-fg))] hover:bg-[hsl(var(--oc-primary-hover))] active:bg-[hsl(var(--oc-primary-active))] disabled:bg-[hsl(var(--oc-primary-disabled))] disabled:text-white",
+          "bg-[hsl(var(--oc-primary))] text-[hsl(var(--oc-primary-fg))] hover:bg-[hsl(var(--oc-primary-hover))] active:bg-[hsl(var(--oc-primary-active))] disabled:bg-[hsl(var(--oc-primary-disabled))] disabled:text-[hsl(var(--oc-text-800))]",
         secondary:
           "border border-[hsl(var(--oc-primary))] bg-transparent text-[hsl(var(--oc-primary))] hover:border-[hsl(var(--oc-primary-hover))] hover:text-[hsl(var(--oc-primary-hover))] active:border-[hsl(var(--oc-primary-active))] disabled:border-[hsl(var(--oc-primary-disabled))] disabled:text-[hsl(var(--oc-primary-disabled))]",
         lite: "border border-[hsl(var(--oc-primary-subtle))] bg-transparent text-[hsl(var(--oc-primary))] hover:text-[hsl(var(--oc-primary-hover))] disabled:text-[hsl(var(--oc-primary-disabled))]",
@@ -43,12 +43,13 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, shape, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, shape, asChild = false, type, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
         ref={ref}
         className={cn(buttonVariants({ variant, size, shape }), className)}
+        type={asChild ? undefined : (type ?? "button")}
         {...props}
       />
     );

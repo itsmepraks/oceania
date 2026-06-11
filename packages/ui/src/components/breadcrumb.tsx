@@ -18,12 +18,9 @@ import { cn } from "../lib/utils";
  *     </BreadcrumbList>
  *   </Breadcrumb>
  */
-const Breadcrumb = React.forwardRef<
-  HTMLElement,
-  React.ComponentPropsWithoutRef<"nav">
->(({ ...props }, ref) => (
-  <nav ref={ref} aria-label="breadcrumb" {...props} />
-));
+const Breadcrumb = React.forwardRef<HTMLElement, React.ComponentPropsWithoutRef<"nav">>(
+  ({ ...props }, ref) => <nav ref={ref} aria-label="breadcrumb" {...props} />,
+);
 Breadcrumb.displayName = "Breadcrumb";
 
 const BreadcrumbList = React.forwardRef<
@@ -33,7 +30,7 @@ const BreadcrumbList = React.forwardRef<
   <ol
     ref={ref}
     className={cn(
-      "flex flex-wrap items-center gap-2 text-sm text-[hsl(var(--oc-text-500))] font-semibold",
+      "flex flex-wrap items-center gap-2 text-sm text-[hsl(var(--oc-text-600))] font-semibold",
       className,
     )}
     {...props}
@@ -45,11 +42,7 @@ const BreadcrumbItem = React.forwardRef<
   HTMLLIElement,
   React.ComponentPropsWithoutRef<"li">
 >(({ className, ...props }, ref) => (
-  <li
-    ref={ref}
-    className={cn("inline-flex items-center gap-2", className)}
-    {...props}
-  />
+  <li ref={ref} className={cn("inline-flex items-center gap-2", className)} {...props} />
 ));
 BreadcrumbItem.displayName = "BreadcrumbItem";
 
@@ -96,7 +89,7 @@ const BreadcrumbSeparator = ({
   <li
     role="presentation"
     aria-hidden="true"
-    className={cn("inline-flex text-[hsl(var(--oc-text-400))]", className)}
+    className={cn("inline-flex text-[hsl(var(--oc-text-600))]", className)}
     {...props}
   >
     {children ?? (

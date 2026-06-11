@@ -88,9 +88,13 @@ const tokenSwatches = [
   ["Caption", "--oc-text-500", "Secondary copy"],
 ] as const;
 
+function preventDemoNavigation(event: React.MouseEvent<HTMLAnchorElement>) {
+  event.preventDefault();
+}
+
 function CopyLine({ children }: { children: React.ReactNode }) {
   return (
-    <code className="block min-w-0 max-w-full overflow-x-auto whitespace-nowrap border border-[hsl(var(--oc-blue2-200))] bg-[hsl(var(--oc-text-900))] px-3 py-2 font-mono text-[11px] text-[hsl(var(--oc-light))]">
+    <code className="block min-w-0 max-w-full overflow-x-auto whitespace-nowrap border border-[hsl(var(--oc-blue2-200))] bg-[hsl(var(--oc-text-900))] px-3 py-2 font-mono text-xs text-[hsl(var(--oc-light))]">
       {children}
     </code>
   );
@@ -118,7 +122,7 @@ function SpecSection({
     >
       <div className="grid gap-0 lg:grid-cols-[154px_minmax(0,1fr)]">
         <div className="border-b border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-text-900))] p-4 text-[hsl(var(--oc-primary-50))] lg:border-b-0 lg:border-r">
-          <p className="font-mono text-[11px] text-[hsl(var(--oc-blue2-200))]">{index}</p>
+          <p className="font-mono text-xs text-[hsl(var(--oc-blue2-200))]">{index}</p>
           <p className="mt-2 text-xs font-bold uppercase">{kicker}</p>
         </div>
         <div className="min-w-0 p-4 sm:p-6 lg:p-8">
@@ -169,7 +173,7 @@ function Specimen({
         {command ? (
           <code
             className={[
-              "max-w-full overflow-x-auto whitespace-nowrap font-mono text-[11px]",
+              "max-w-full overflow-x-auto whitespace-nowrap font-mono text-xs",
               dark ? "text-[hsl(var(--oc-blue2-200))]" : "text-[hsl(var(--oc-text-600))]",
             ].join(" ")}
           >
@@ -201,10 +205,10 @@ function TokenSwatch({
         <p className="text-sm font-bold uppercase text-[hsl(var(--oc-text-900))]">
           {name}
         </p>
-        <p className="mt-1 overflow-x-auto whitespace-nowrap font-mono text-[11px] text-[hsl(var(--oc-blue1-700))]">
+        <p className="mt-1 overflow-x-auto whitespace-nowrap font-mono text-xs text-[hsl(var(--oc-blue1-700))]">
           {token}
         </p>
-        <p className="mt-2 text-xs text-[hsl(var(--oc-text-600))]">{usage}</p>
+        <p className="mt-2 text-xs text-[hsl(var(--oc-caption))]">{usage}</p>
       </div>
     </div>
   );
@@ -223,7 +227,7 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
               <p className="font-mono text-xs text-[hsl(var(--oc-blue2-200))]">OCN-00</p>
               <p className="mt-3 text-sm font-bold uppercase">Registry lab</p>
             </div>
-            <p className="[writing-mode:vertical-rl] font-mono text-xs uppercase text-[hsl(var(--oc-text-400))]">
+            <p className="[writing-mode:vertical-rl] font-mono text-xs uppercase text-[hsl(var(--oc-text-300))]">
               editable source / controlled tokens / react
             </p>
           </div>
@@ -285,7 +289,7 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
               <Specimen title="Live specimen" tone="dark">
                 <div className="grid gap-5">
                   <div className="border border-[hsl(var(--oc-light))] bg-[hsl(var(--oc-primary-50))] p-4 text-[hsl(var(--oc-text-900))]">
-                    <p className="font-mono text-[11px] uppercase text-[hsl(var(--oc-blue1-700))]">
+                    <p className="font-mono text-xs uppercase text-[hsl(var(--oc-blue1-700))]">
                       registry receipt
                     </p>
                     <h2 className="mt-2 text-2xl font-semibold">
@@ -306,7 +310,7 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
                         key={label}
                         className="border border-[hsl(var(--oc-light))] p-3"
                       >
-                        <p className="text-xs text-[hsl(var(--oc-text-400))]">{label}</p>
+                        <p className="text-xs text-[hsl(var(--oc-text-200))]">{label}</p>
                         <p className="mt-1 text-2xl font-semibold tabular-nums">
                           {value}
                         </p>
@@ -315,9 +319,24 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
                   </div>
                   <Tabs defaultValue="preview">
                     <TabsList>
-                      <TabsTrigger value="preview">Preview</TabsTrigger>
-                      <TabsTrigger value="code">Code</TabsTrigger>
-                      <TabsTrigger value="tokens">Tokens</TabsTrigger>
+                      <TabsTrigger
+                        value="preview"
+                        className="data-[state=active]:text-[hsl(var(--oc-blue2-200))] data-[state=active]:after:bg-[hsl(var(--oc-blue2-200))]"
+                      >
+                        Preview
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="code"
+                        className="data-[state=active]:text-[hsl(var(--oc-blue2-200))] data-[state=active]:after:bg-[hsl(var(--oc-blue2-200))]"
+                      >
+                        Code
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="tokens"
+                        className="data-[state=active]:text-[hsl(var(--oc-blue2-200))] data-[state=active]:after:bg-[hsl(var(--oc-blue2-200))]"
+                      >
+                        Tokens
+                      </TabsTrigger>
                     </TabsList>
                     <TabsContent value="preview">
                       <p className="text-sm text-[hsl(var(--oc-text-200))]">
@@ -391,7 +410,7 @@ export default function HomePage() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="whitespace-nowrap border border-[hsl(var(--oc-text-900))] bg-white px-4 py-2.5 font-mono text-[11px] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-ring))] focus-visible:ring-offset-2"
+                  className="whitespace-nowrap border border-[hsl(var(--oc-text-900))] bg-white px-4 py-2.5 font-mono text-xs font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-ring))] focus-visible:ring-offset-2"
                 >
                   {item.index} {item.label}
                 </a>
@@ -420,7 +439,7 @@ export default function HomePage() {
                       href={item.href}
                       className="flex min-w-32 items-center gap-2 border-r border-[hsl(var(--oc-text-900))] px-4 py-4 text-sm font-bold transition-colors hover:bg-[hsl(var(--oc-blue2-200))] focus-visible:bg-[hsl(var(--oc-blue2-200))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-ring))] focus-visible:ring-inset"
                     >
-                      <span className="font-mono text-[11px] text-[hsl(var(--oc-blue1-700))]">
+                      <span className="font-mono text-xs text-[hsl(var(--oc-blue1-700))]">
                         {item.index}
                       </span>
                       {item.label}
@@ -530,7 +549,7 @@ export default function HomePage() {
                 >
                   <div className="grid gap-6 md:grid-cols-3">
                     <div className="space-y-3">
-                      <p className="font-mono text-[11px] font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
+                      <p className="font-mono text-xs font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
                         Sharp
                       </p>
                       <Input shape="sharp" placeholder="Workspace name" />
@@ -538,7 +557,7 @@ export default function HomePage() {
                       <Input shape="sharp" error defaultValue="Invalid slug" />
                     </div>
                     <div className="space-y-3">
-                      <p className="font-mono text-[11px] font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
+                      <p className="font-mono text-xs font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
                         Cornered
                       </p>
                       <Input shape="cornered" placeholder="Email address" />
@@ -546,7 +565,7 @@ export default function HomePage() {
                       <Input shape="cornered" disabled placeholder="Disabled" />
                     </div>
                     <div className="space-y-3">
-                      <p className="font-mono text-[11px] font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
+                      <p className="font-mono text-xs font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
                         Rounded
                       </p>
                       <Input shape="rounded" placeholder="Search components" />
@@ -615,7 +634,7 @@ export default function HomePage() {
                       />
                       Indeterminate
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-[hsl(var(--oc-text-400))]">
+                    <div className="flex items-center gap-2 text-sm text-[hsl(var(--oc-text-300))]">
                       <Checkbox aria-label="Disabled" disabled />
                       Disabled
                     </div>
@@ -639,7 +658,7 @@ export default function HomePage() {
                       <RadioGroupItem aria-label="Platform" value="platform" />
                       Platform
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-[hsl(var(--oc-text-400))]">
+                    <div className="flex items-center gap-2 text-sm text-[hsl(var(--oc-text-300))]">
                       <RadioGroupItem aria-label="Archive" value="archive" disabled />
                       Archive
                     </div>
@@ -663,7 +682,7 @@ export default function HomePage() {
                       <span>Outlined mode</span>
                       <Switch aria-label="Outlined mode" tone="outlined" defaultChecked />
                     </div>
-                    <div className="flex items-center justify-between gap-4 text-sm text-[hsl(var(--oc-text-400))]">
+                    <div className="flex items-center justify-between gap-4 text-sm text-[hsl(var(--oc-text-300))]">
                       <span>Locked</span>
                       <Switch aria-label="Locked" disabled />
                     </div>
@@ -782,11 +801,21 @@ export default function HomePage() {
                     <Breadcrumb>
                       <BreadcrumbList>
                         <BreadcrumbItem>
-                          <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                          <BreadcrumbLink
+                            href="#navigation"
+                            onClick={preventDemoNavigation}
+                          >
+                            Home
+                          </BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
-                          <BreadcrumbLink href="#">Library</BreadcrumbLink>
+                          <BreadcrumbLink
+                            href="#navigation"
+                            onClick={preventDemoNavigation}
+                          >
+                            Library
+                          </BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
@@ -802,24 +831,44 @@ export default function HomePage() {
                     <Pagination>
                       <PaginationContent>
                         <PaginationItem>
-                          <PaginationPrevious href="#" />
+                          <PaginationPrevious
+                            href="#navigation"
+                            onClick={preventDemoNavigation}
+                          />
                         </PaginationItem>
                         <PaginationItem>
-                          <PaginationLink href="#" isActive>
+                          <PaginationLink
+                            href="#navigation"
+                            isActive
+                            onClick={preventDemoNavigation}
+                          >
                             1
                           </PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
-                          <PaginationLink href="#">2</PaginationLink>
+                          <PaginationLink
+                            href="#navigation"
+                            onClick={preventDemoNavigation}
+                          >
+                            2
+                          </PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
-                          <PaginationLink href="#">3</PaginationLink>
+                          <PaginationLink
+                            href="#navigation"
+                            onClick={preventDemoNavigation}
+                          >
+                            3
+                          </PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
                           <PaginationEllipsis />
                         </PaginationItem>
                         <PaginationItem>
-                          <PaginationNext href="#" />
+                          <PaginationNext
+                            href="#navigation"
+                            onClick={preventDemoNavigation}
+                          />
                         </PaginationItem>
                       </PaginationContent>
                     </Pagination>

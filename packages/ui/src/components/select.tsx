@@ -38,11 +38,11 @@ const SelectTrigger = React.forwardRef<
       "font-[var(--oc-font-sans)] text-sm font-medium",
       "text-[hsl(var(--oc-text-900))]",
       "transition-colors",
-      "border-[hsl(var(--oc-text-400))]",
+      "border-[hsl(var(--oc-text-500))]",
       "hover:border-[hsl(var(--oc-text-600))]",
       "focus:outline-none data-[state=open]:border-[hsl(var(--oc-blue1-800))]",
       "focus:border-[hsl(var(--oc-blue1-800))] focus:ring-2 focus:ring-[hsl(var(--oc-blue1-800)/0.18)]",
-      "data-[placeholder]:text-[hsl(var(--oc-text-400))]",
+      "data-[placeholder]:text-[hsl(var(--oc-placeholder))]",
       "disabled:cursor-not-allowed disabled:border-[hsl(var(--oc-text-300))] disabled:text-[hsl(var(--oc-text-300))]",
       shape === "sharp" && "rounded-none",
       shape === "cornered" && "rounded-[var(--oc-radius-md)]",
@@ -56,7 +56,7 @@ const SelectTrigger = React.forwardRef<
       <svg
         viewBox="0 0 16 16"
         aria-hidden="true"
-        className="h-4 w-4 text-[hsl(var(--oc-text-500))] transition-transform group-data-[state=open]/oc-select:rotate-180"
+        className="h-4 w-4 text-[hsl(var(--oc-text-600))] transition-transform group-data-[state=open]/oc-select:rotate-180"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.75"
@@ -90,9 +90,7 @@ const SelectContent = React.forwardRef<
       )}
       {...props}
     >
-      <SelectPrimitive.Viewport className="p-1">
-        {children}
-      </SelectPrimitive.Viewport>
+      <SelectPrimitive.Viewport className="p-1">{children}</SelectPrimitive.Viewport>
     </SelectPrimitive.Content>
   </SelectPrimitive.Portal>
 ));
@@ -105,7 +103,7 @@ const SelectLabel = React.forwardRef<
   <SelectPrimitive.Label
     ref={ref}
     className={cn(
-      "px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-[hsl(var(--oc-text-500))]",
+      "px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-[hsl(var(--oc-caption))]",
       className,
     )}
     {...props}

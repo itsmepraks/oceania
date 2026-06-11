@@ -22,7 +22,7 @@ const inputRootVariants = cva(
     "font-[var(--oc-font-sans)] font-medium",
     "transition-colors",
     // default border + text (Text/400)
-    "border-[hsl(var(--oc-text-400))] text-[hsl(var(--oc-text-900))]",
+    "border-[hsl(var(--oc-text-500))] text-[hsl(var(--oc-text-900))]",
     // hover → Text/600
     "hover:border-[hsl(var(--oc-text-600))]",
     // focus-within (active) → Primary 1/800
@@ -60,7 +60,7 @@ const inputRootVariants = cva(
 const inputFieldClasses = cn(
   "peer flex-1 bg-transparent outline-none border-0 p-0",
   "text-[hsl(var(--oc-text-900))]",
-  "placeholder:text-[hsl(var(--oc-text-400))]",
+  "placeholder:text-[hsl(var(--oc-placeholder))]",
   "disabled:cursor-not-allowed disabled:text-[hsl(var(--oc-text-300))]",
   "disabled:placeholder:text-[hsl(var(--oc-text-300))]",
 );
@@ -95,16 +95,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ) => {
     return (
       <div
-        className={cn(
-          inputRootVariants({ shape, inputSize }),
-          wrapperClassName,
-        )}
+        className={cn(inputRootVariants({ shape, inputSize }), wrapperClassName)}
         aria-invalid={error || undefined}
         data-disabled={disabled || undefined}
       >
         {startIcon ? (
           <span
-            className="flex h-4 w-4 shrink-0 items-center justify-center text-[hsl(var(--oc-text-500))]"
+            className="flex h-4 w-4 shrink-0 items-center justify-center text-[hsl(var(--oc-text-600))]"
             aria-hidden="true"
           >
             {startIcon}
@@ -118,7 +115,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         />
         {endIcon ? (
           <span
-            className="flex h-4 w-4 shrink-0 items-center justify-center text-[hsl(var(--oc-text-500))]"
+            className="flex h-4 w-4 shrink-0 items-center justify-center text-[hsl(var(--oc-text-600))]"
             aria-hidden="true"
           >
             {endIcon}
@@ -159,20 +156,12 @@ const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
             {label}
           </label>
         ) : null}
-        <Input
-          ref={ref}
-          id={inputId}
-          error={error}
-          className={className}
-          {...rest}
-        />
+        <Input ref={ref} id={inputId} error={error} className={className} {...rest} />
         {message ? (
           <p
             className={cn(
               "text-xs",
-              error
-                ? "text-[hsl(var(--oc-error-500))]"
-                : "text-[hsl(var(--oc-text-500))]",
+              error ? "text-[hsl(var(--oc-error-500))]" : "text-[hsl(var(--oc-caption))]",
             )}
           >
             {message}

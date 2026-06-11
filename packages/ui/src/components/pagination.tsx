@@ -23,10 +23,7 @@ import { cn } from "../lib/utils";
  *     </PaginationContent>
  *   </Pagination>
  */
-const Pagination = ({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"nav">) => (
+const Pagination = ({ className, ...props }: React.ComponentPropsWithoutRef<"nav">) => (
   <nav
     aria-label="pagination"
     className={cn("mx-auto flex w-full justify-center", className)}
@@ -77,7 +74,7 @@ const PaginationLink = ({
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-blue1-800)/0.35)] focus-visible:ring-offset-1",
       isActive
         ? "bg-[hsl(var(--oc-blue1-500))] text-[hsl(var(--oc-light))] hover:bg-[hsl(var(--oc-blue1-700))]"
-        : "text-[hsl(var(--oc-text-500))] hover:text-[hsl(var(--oc-text-800))]",
+        : "text-[hsl(var(--oc-text-600))] hover:text-[hsl(var(--oc-text-800))]",
       disabled && "pointer-events-none opacity-40",
       className,
     )}
@@ -151,7 +148,7 @@ const PaginationEllipsis = ({
   <span
     aria-hidden="true"
     className={cn(
-      "inline-flex h-9 w-9 items-center justify-center text-sm font-semibold text-[hsl(var(--oc-text-500))]",
+      "inline-flex h-9 w-9 items-center justify-center text-sm font-semibold text-[hsl(var(--oc-text-600))]",
       className,
     )}
     {...props}

@@ -9,7 +9,7 @@ import { cn } from "../lib/utils";
  * Tabs — Radix Tabs themed for oceania.
  *
  * Figma exposes a horizontal underline style (default) and a vertical style.
- * Active trigger uses Primary 2/500 (#4A4CFF), inactive uses Text/500.
+ * Active trigger uses Primary 1/700 (#0003FF), inactive uses Text/600.
  * A 2px underline sits under the active trigger; the full row gets a
  * 1px Text/200 baseline so inactive triggers visually share a line.
  *
@@ -56,16 +56,16 @@ const TabsTrigger = React.forwardRef<
       "relative inline-flex items-center justify-center",
       "px-1 pb-3 pt-1",
       "text-sm font-semibold leading-4",
-      "text-[hsl(var(--oc-text-500))]",
+      "text-[hsl(var(--oc-text-600))]",
       "transition-colors",
       "hover:text-[hsl(var(--oc-text-800))]",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-blue1-800)/0.35)] focus-visible:ring-offset-2",
       "disabled:pointer-events-none disabled:opacity-50",
       // active state
-      "data-[state=active]:text-[hsl(var(--oc-blue2-500))]",
+      "data-[state=active]:text-[hsl(var(--oc-blue1-700))]",
       // 2px underline tied to the bottom of the list border
       "after:absolute after:left-0 after:right-0 after:-bottom-px after:h-[2px]",
-      "after:bg-transparent data-[state=active]:after:bg-[hsl(var(--oc-blue2-500))]",
+      "after:bg-transparent data-[state=active]:after:bg-[hsl(var(--oc-blue1-700))]",
       // vertical orientation flips the indicator to the right edge
       "data-[orientation=vertical]:after:left-auto data-[orientation=vertical]:after:right-[-1px]",
       "data-[orientation=vertical]:after:top-0 data-[orientation=vertical]:after:bottom-0",
