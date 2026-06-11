@@ -8,8 +8,8 @@
     "@radix-ui/react-tooltip"
   ],
   "registryDependencies": [
-    "http://localhost:3333/r/utils.json",
-    "http://localhost:3333/r/tokens.json"
+    "https://oceania.praks.me/r/utils.json",
+    "https://oceania.praks.me/r/tokens.json"
   ],
   "docs": "Import `app/oceania-tokens.css` from your global stylesheet if the CLI does not add it automatically.",
   "files": [

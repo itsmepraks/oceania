@@ -39,7 +39,7 @@ import {
   TooltipProvider,
 } from "@oceania/ui";
 
-const defaultOrigin = "http://localhost:3333";
+const defaultOrigin = "https://oceania.praks.me";
 
 const navGroups = [
   {
@@ -282,7 +282,6 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
             </div>
 
             <div className="relative min-w-0 2xl:pt-24">
-              <div className="absolute -left-5 top-8 hidden h-24 w-24 border border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-primary-500))] 2xl:block" />
               <Specimen title="Live specimen" tone="dark">
                 <div className="grid gap-5">
                   <div className="border border-[hsl(var(--oc-light))] bg-[hsl(var(--oc-primary-50))] p-4 text-[hsl(var(--oc-text-900))]">

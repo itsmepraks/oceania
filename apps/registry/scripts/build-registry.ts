@@ -11,7 +11,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..", "..", "..");
 const uiDir = join(root, "packages", "ui", "src");
 const outDir = join(__dirname, "..", "public", "r");
-const REGISTRY_BASE_URL = process.env.OCEANIA_REGISTRY_URL ?? "http://localhost:3333/r";
+const REGISTRY_BASE_URL =
+  process.env.OCEANIA_REGISTRY_URL ?? "https://oceania.praks.me/r";
 
 interface RegistryItem {
   $schema: string;
@@ -83,8 +84,9 @@ const items: RegistryItem[] = [
     name: "tokens",
     type: "registry:style",
     title: "Oceania tokens",
-    description: "Figma-sourced Oceania CSS variables for color, typography, radii, and control sizing.",
-    docs: "Add `@import \"./oceania-tokens.css\";` to your app/global stylesheet after installing.",
+    description:
+      "Figma-sourced Oceania CSS variables for color, typography, radii, and control sizing.",
+    docs: 'Add `@import "./oceania-tokens.css";` to your app/global stylesheet after installing.',
     files: [
       {
         path: "styles/oceania-tokens.css",
@@ -94,27 +96,90 @@ const items: RegistryItem[] = [
       },
     ],
   },
-  ui("button", "button.tsx", [
-    "@radix-ui/react-slot",
-    "class-variance-authority",
-  ], "Button", "Primary, secondary, lite, text, and destructive button variants."),
-  ui("input", "input.tsx", ["class-variance-authority"], "Input", "Text input and field wrapper with Figma states."),
-  ui("textarea", "textarea.tsx", ["class-variance-authority"], "Textarea", "Multi-line text input with Oceania borders and states."),
-  ui("checkbox", "checkbox.tsx", ["@radix-ui/react-checkbox"], "Checkbox", "Radix checkbox styled for Oceania selected, mixed, and disabled states."),
-  ui("radio-group", "radio-group.tsx", ["@radix-ui/react-radio-group"], "Radio group", "Accessible radio group and radio item primitives."),
-  ui("switch", "switch.tsx", [
-    "@radix-ui/react-switch",
-    "class-variance-authority",
-  ], "Switch", "Filled and outlined toggle controls."),
-  ui("slider", "slider.tsx", ["@radix-ui/react-slider"], "Slider", "Single or range slider with optional value bubble."),
-  ui("select", "select.tsx", ["@radix-ui/react-select"], "Select", "Single-selection dropdown built on Radix Select."),
-  ui("tabs", "tabs.tsx", [
-    "@radix-ui/react-tabs",
-    "class-variance-authority",
-  ], "Tabs", "Horizontal and vertical tab primitives."),
-  ui("breadcrumb", "breadcrumb.tsx", ["@radix-ui/react-slot"], "Breadcrumb", "Semantic breadcrumb navigation with active page state."),
-  ui("pagination", "pagination.tsx", [], "Pagination", "Numeric pagination controls with previous and next links."),
-  ui("tooltip", "tooltip.tsx", ["@radix-ui/react-tooltip"], "Tooltip", "Radix tooltip styled with Oceania dark blue surface."),
+  ui(
+    "button",
+    "button.tsx",
+    ["@radix-ui/react-slot", "class-variance-authority"],
+    "Button",
+    "Primary, secondary, lite, text, and destructive button variants.",
+  ),
+  ui(
+    "input",
+    "input.tsx",
+    ["class-variance-authority"],
+    "Input",
+    "Text input and field wrapper with Figma states.",
+  ),
+  ui(
+    "textarea",
+    "textarea.tsx",
+    ["class-variance-authority"],
+    "Textarea",
+    "Multi-line text input with Oceania borders and states.",
+  ),
+  ui(
+    "checkbox",
+    "checkbox.tsx",
+    ["@radix-ui/react-checkbox"],
+    "Checkbox",
+    "Radix checkbox styled for Oceania selected, mixed, and disabled states.",
+  ),
+  ui(
+    "radio-group",
+    "radio-group.tsx",
+    ["@radix-ui/react-radio-group"],
+    "Radio group",
+    "Accessible radio group and radio item primitives.",
+  ),
+  ui(
+    "switch",
+    "switch.tsx",
+    ["@radix-ui/react-switch", "class-variance-authority"],
+    "Switch",
+    "Filled and outlined toggle controls.",
+  ),
+  ui(
+    "slider",
+    "slider.tsx",
+    ["@radix-ui/react-slider"],
+    "Slider",
+    "Single or range slider with optional value bubble.",
+  ),
+  ui(
+    "select",
+    "select.tsx",
+    ["@radix-ui/react-select"],
+    "Select",
+    "Single-selection dropdown built on Radix Select.",
+  ),
+  ui(
+    "tabs",
+    "tabs.tsx",
+    ["@radix-ui/react-tabs", "class-variance-authority"],
+    "Tabs",
+    "Horizontal and vertical tab primitives.",
+  ),
+  ui(
+    "breadcrumb",
+    "breadcrumb.tsx",
+    ["@radix-ui/react-slot"],
+    "Breadcrumb",
+    "Semantic breadcrumb navigation with active page state.",
+  ),
+  ui(
+    "pagination",
+    "pagination.tsx",
+    [],
+    "Pagination",
+    "Numeric pagination controls with previous and next links.",
+  ),
+  ui(
+    "tooltip",
+    "tooltip.tsx",
+    ["@radix-ui/react-tooltip"],
+    "Tooltip",
+    "Radix tooltip styled with Oceania dark blue surface.",
+  ),
 ];
 
 mkdirSync(outDir, { recursive: true });
