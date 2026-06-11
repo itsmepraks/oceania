@@ -39,7 +39,7 @@ import {
   TooltipProvider,
 } from "@oceania/ui";
 
-const registryBase = "http://localhost:3333/r";
+const defaultOrigin = "http://localhost:3333";
 
 const navGroups = [
   {
@@ -210,7 +210,7 @@ function TokenSwatch({
   );
 }
 
-function LabHero() {
+function LabHero({ hostLabel }: { hostLabel: string }) {
   return (
     <section
       id="overview"
@@ -231,7 +231,7 @@ function LabHero() {
 
         <div className="relative min-w-0 overflow-hidden bg-[linear-gradient(hsl(var(--oc-text-200))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--oc-text-200))_1px,transparent_1px)] bg-[size:28px_28px]">
           <div className="absolute right-4 top-4 hidden border border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-blue2-200))] px-3 py-2 font-mono text-xs font-bold text-[hsl(var(--oc-text-900))] sm:block">
-            LOCALHOST:3333
+            {hostLabel}
           </div>
           <div className="grid gap-8 px-4 py-10 sm:px-6 lg:px-10 lg:py-16 2xl:grid-cols-[minmax(0,0.56fr)_minmax(440px,0.44fr)]">
             <div className="min-w-0">
@@ -352,18 +352,36 @@ export default function HomePage() {
   const [radio, setRadio] = React.useState("teams");
   const [on, setOn] = React.useState(true);
   const [slider, setSlider] = React.useState([64]);
+  const [origin, setOrigin] = React.useState(defaultOrigin);
+
+  React.useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
+
+  const registryBase = `${origin}/r`;
+  const hostLabel = origin.replace(/^https?:\/\//, "").toUpperCase();
 
   return (
     <TooltipProvider delayDuration={150}>
       <div className="min-h-screen bg-[hsl(var(--oc-text-900))] text-[hsl(var(--oc-text-900))]">
-        <div className="sticky top-0 z-30 border-b border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-primary-50))]/95 backdrop-blur lg:hidden">
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+
+        <nav
+          aria-label="Mobile section navigation"
+          className="sticky top-0 z-30 border-b border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-primary-50))]/95 backdrop-blur lg:hidden"
+        >
           <div className="flex items-center justify-between px-4 py-3">
-            <a href="#overview" className="text-lg font-bold">
+            <a
+              href="#overview"
+              className="text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-ring))] focus-visible:ring-offset-2"
+            >
               oceania
             </a>
             <a
               href="#install"
-              className="border border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-blue2-200))] px-4 py-2 text-xs font-bold uppercase"
+              className="border border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-blue2-200))] px-4 py-2 text-xs font-bold uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-ring))] focus-visible:ring-offset-2"
             >
               Install
             </a>
@@ -374,21 +392,24 @@ export default function HomePage() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="whitespace-nowrap border border-[hsl(var(--oc-text-900))] bg-white px-4 py-2.5 font-mono text-[11px] font-bold"
+                  className="whitespace-nowrap border border-[hsl(var(--oc-text-900))] bg-white px-4 py-2.5 font-mono text-[11px] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-ring))] focus-visible:ring-offset-2"
                 >
                   {item.index} {item.label}
                 </a>
               )),
             )}
           </div>
-        </div>
+        </nav>
 
         <div className="mx-auto max-w-[1540px] bg-[hsl(var(--oc-primary-50))]">
           <div className="hidden border-b border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-primary-50))] lg:block">
-            <nav className="grid grid-cols-[154px_minmax(0,1fr)]">
+            <nav
+              aria-label="Registry section navigation"
+              className="grid grid-cols-[154px_minmax(0,1fr)]"
+            >
               <a
                 href="#overview"
-                className="border-r border-[hsl(var(--oc-text-900))] px-4 py-4 text-xl font-bold"
+                className="border-r border-[hsl(var(--oc-text-900))] px-4 py-4 text-xl font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-ring))] focus-visible:ring-inset"
               >
                 oceania
               </a>
@@ -398,7 +419,7 @@ export default function HomePage() {
                     <a
                       key={item.href}
                       href={item.href}
-                      className="flex min-w-32 items-center gap-2 border-r border-[hsl(var(--oc-text-900))] px-4 py-4 text-sm font-bold transition-colors hover:bg-[hsl(var(--oc-blue2-200))]"
+                      className="flex min-w-32 items-center gap-2 border-r border-[hsl(var(--oc-text-900))] px-4 py-4 text-sm font-bold transition-colors hover:bg-[hsl(var(--oc-blue2-200))] focus-visible:bg-[hsl(var(--oc-blue2-200))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--oc-ring))] focus-visible:ring-inset"
                     >
                       <span className="font-mono text-[11px] text-[hsl(var(--oc-blue1-700))]">
                         {item.index}
@@ -411,428 +432,437 @@ export default function HomePage() {
             </nav>
           </div>
 
-          <LabHero />
+          <main id="main-content" tabIndex={-1} className="focus:outline-none">
+            <LabHero hostLabel={hostLabel} />
 
-          <SpecSection
-            id="install"
-            index="01"
-            kicker="Install"
-            title="A registry page should feel operational."
-            description="The install flow stays direct, with commands framed as part of the same token-backed system rather than generic docs filler."
-          >
-            <div className="grid gap-4 xl:grid-cols-[minmax(0,0.65fr)_minmax(280px,0.35fr)]">
-              <Specimen title="Quick start" tone="dark">
-                <div className="space-y-3">
-                  <CopyLine>pnpm install</CopyLine>
-                  <CopyLine>pnpm --filter @oceania/registry dev</CopyLine>
-                  <CopyLine>npx shadcn@latest add {registryBase}/button.json</CopyLine>
-                </div>
-              </Specimen>
-              <Specimen title="Token import" tone="paper">
-                <p className="text-sm leading-6 text-[hsl(var(--oc-text-800))]">
-                  If the CLI does not add the token file automatically, import it from the
-                  consuming app global stylesheet.
-                </p>
-                <div className="mt-4">
-                  <CopyLine>@import "./oceania-tokens.css";</CopyLine>
-                </div>
-              </Specimen>
-            </div>
-            <div className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
-              {installItems.map((item) => (
-                <CopyLine key={item}>
-                  npx shadcn@latest add {registryBase}/{item}.json
-                </CopyLine>
-              ))}
-            </div>
-          </SpecSection>
-
-          <SpecSection
-            id="tokens"
-            index="02"
-            kicker="Tokens"
-            title="Palette as evidence, not decoration."
-            description="The token strip is intentionally blunt: names, variables, and usage hints, all pulled from the Oceania palette."
-          >
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-              {tokenSwatches.map(([name, token, usage]) => (
-                <TokenSwatch key={token} name={name} token={token} usage={usage} />
-              ))}
-            </div>
-          </SpecSection>
-
-          <SpecSection
-            id="button"
-            index="03"
-            kicker="Actions"
-            title="Buttons staged like control samples."
-            description="The actions are still simple and source-editable, but the page gives them a stronger frame."
-          >
-            <div className="grid gap-4 xl:grid-cols-[minmax(0,0.58fr)_minmax(0,0.42fr)]">
-              <Specimen
-                title="Variant run"
-                command={`npx shadcn@latest add ${registryBase}/button.json`}
-              >
-                <div className="flex flex-wrap gap-3">
-                  <Button variant="primary">Primary</Button>
-                  <Button variant="secondary">Secondary</Button>
-                  <Button variant="lite">Lite</Button>
-                  <Button variant="text">Text</Button>
-                  <Button variant="destructive">Destructive</Button>
-                </div>
-              </Specimen>
-              <Specimen title="Scale and radius" tone="paper">
-                <div className="flex flex-wrap items-center gap-3">
-                  <Button size="lg">Large</Button>
-                  <Button size="md">Medium</Button>
-                  <Button size="sm">Small</Button>
-                  <Button shape="rounded" variant="secondary">
-                    Rounded
-                  </Button>
-                  <Button disabled>Disabled</Button>
-                </div>
-              </Specimen>
-            </div>
-          </SpecSection>
-
-          <SpecSection
-            id="inputs"
-            index="04"
-            kicker="Forms"
-            title="Forms get the full inspection table."
-            description="Shapes, failure states, captions, and longer text entry are staged together so their border grammar can be compared quickly."
-          >
-            <div className="grid gap-4">
-              <Specimen
-                title="Shape matrix"
-                command={`npx shadcn@latest add ${registryBase}/input.json`}
-              >
-                <div className="grid gap-6 md:grid-cols-3">
+            <SpecSection
+              id="install"
+              index="01"
+              kicker="Install"
+              title="A registry page should feel operational."
+              description="The install flow stays direct, with commands framed as part of the same token-backed system rather than generic docs filler."
+            >
+              <div className="grid gap-4 xl:grid-cols-[minmax(0,0.65fr)_minmax(280px,0.35fr)]">
+                <Specimen title="Quick start" tone="dark">
                   <div className="space-y-3">
-                    <p className="font-mono text-[11px] font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
-                      Sharp
-                    </p>
-                    <Input shape="sharp" placeholder="Workspace name" />
-                    <Input shape="sharp" defaultValue="Oceania Labs" />
-                    <Input shape="sharp" error defaultValue="Invalid slug" />
+                    <CopyLine>pnpm install</CopyLine>
+                    <CopyLine>pnpm --filter @oceania/registry dev</CopyLine>
+                    <CopyLine>npx shadcn@latest add {registryBase}/button.json</CopyLine>
                   </div>
-                  <div className="space-y-3">
-                    <p className="font-mono text-[11px] font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
-                      Cornered
-                    </p>
-                    <Input shape="cornered" placeholder="Email address" />
-                    <Input shape="cornered" defaultValue="team@oceania.dev" />
-                    <Input shape="cornered" disabled placeholder="Disabled" />
+                </Specimen>
+                <Specimen title="Token import" tone="paper">
+                  <p className="text-sm leading-6 text-[hsl(var(--oc-text-800))]">
+                    If the CLI does not add the token file automatically, import it from
+                    the consuming app global stylesheet.
+                  </p>
+                  <div className="mt-4">
+                    <CopyLine>@import "./oceania-tokens.css";</CopyLine>
                   </div>
-                  <div className="space-y-3">
-                    <p className="font-mono text-[11px] font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
+                </Specimen>
+              </div>
+              <div className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+                {installItems.map((item) => (
+                  <CopyLine key={item}>
+                    npx shadcn@latest add {registryBase}/{item}.json
+                  </CopyLine>
+                ))}
+              </div>
+            </SpecSection>
+
+            <SpecSection
+              id="tokens"
+              index="02"
+              kicker="Tokens"
+              title="Palette as evidence, not decoration."
+              description="The token strip is intentionally blunt: names, variables, and usage hints, all pulled from the Oceania palette."
+            >
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                {tokenSwatches.map(([name, token, usage]) => (
+                  <TokenSwatch key={token} name={name} token={token} usage={usage} />
+                ))}
+              </div>
+            </SpecSection>
+
+            <SpecSection
+              id="button"
+              index="03"
+              kicker="Actions"
+              title="Buttons staged like control samples."
+              description="The actions are still simple and source-editable, but the page gives them a stronger frame."
+            >
+              <div className="grid gap-4 xl:grid-cols-[minmax(0,0.58fr)_minmax(0,0.42fr)]">
+                <Specimen
+                  title="Variant run"
+                  command={`npx shadcn@latest add ${registryBase}/button.json`}
+                >
+                  <div className="flex flex-wrap gap-3">
+                    <Button variant="primary">Primary</Button>
+                    <Button variant="secondary">Secondary</Button>
+                    <Button variant="lite">Lite</Button>
+                    <Button variant="text">Text</Button>
+                    <Button variant="destructive">Destructive</Button>
+                  </div>
+                </Specimen>
+                <Specimen title="Scale and radius" tone="paper">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Button size="lg">Large</Button>
+                    <Button size="md">Medium</Button>
+                    <Button size="sm">Small</Button>
+                    <Button shape="rounded" variant="secondary">
                       Rounded
-                    </p>
-                    <Input shape="rounded" placeholder="Search components" />
-                    <Input shape="rounded" defaultValue="Button" />
-                    <Input shape="rounded" error defaultValue="Missing value" />
+                    </Button>
+                    <Button disabled>Disabled</Button>
                   </div>
+                </Specimen>
+              </div>
+            </SpecSection>
+
+            <SpecSection
+              id="inputs"
+              index="04"
+              kicker="Forms"
+              title="Forms get the full inspection table."
+              description="Shapes, failure states, captions, and longer text entry are staged together so their border grammar can be compared quickly."
+            >
+              <div className="grid gap-4">
+                <Specimen
+                  title="Shape matrix"
+                  command={`npx shadcn@latest add ${registryBase}/input.json`}
+                >
+                  <div className="grid gap-6 md:grid-cols-3">
+                    <div className="space-y-3">
+                      <p className="font-mono text-[11px] font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
+                        Sharp
+                      </p>
+                      <Input shape="sharp" placeholder="Workspace name" />
+                      <Input shape="sharp" defaultValue="Oceania Labs" />
+                      <Input shape="sharp" error defaultValue="Invalid slug" />
+                    </div>
+                    <div className="space-y-3">
+                      <p className="font-mono text-[11px] font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
+                        Cornered
+                      </p>
+                      <Input shape="cornered" placeholder="Email address" />
+                      <Input shape="cornered" defaultValue="team@oceania.dev" />
+                      <Input shape="cornered" disabled placeholder="Disabled" />
+                    </div>
+                    <div className="space-y-3">
+                      <p className="font-mono text-[11px] font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
+                        Rounded
+                      </p>
+                      <Input shape="rounded" placeholder="Search components" />
+                      <Input shape="rounded" defaultValue="Button" />
+                      <Input shape="rounded" error defaultValue="Missing value" />
+                    </div>
+                  </div>
+                </Specimen>
+                <div className="grid gap-4 xl:grid-cols-2">
+                  <Specimen title="Field copy" tone="paper">
+                    <div className="grid gap-4">
+                      <InputField
+                        label="Email"
+                        placeholder="you@example.com"
+                        caption="Used for release notes and registry updates."
+                      />
+                      <InputField
+                        label="Username"
+                        defaultValue="jrambo"
+                        error
+                        errorCaption="Username does not match the workspace."
+                      />
+                    </div>
+                  </Specimen>
+                  <Specimen
+                    title="Long form"
+                    command={`npx shadcn@latest add ${registryBase}/textarea.json`}
+                  >
+                    <Textarea
+                      placeholder="Write implementation notes..."
+                      defaultValue="Button variants should remain source-editable after install."
+                      rows={6}
+                    />
+                  </Specimen>
                 </div>
-              </Specimen>
-              <div className="grid gap-4 xl:grid-cols-2">
-                <Specimen title="Field copy" tone="paper">
-                  <div className="grid gap-4">
-                    <InputField
-                      label="Email"
-                      placeholder="you@example.com"
-                      caption="Used for release notes and registry updates."
-                    />
-                    <InputField
-                      label="Username"
-                      defaultValue="jrambo"
-                      error
-                      errorCaption="Username does not match the workspace."
-                    />
+              </div>
+            </SpecSection>
+
+            <SpecSection
+              id="choices"
+              index="05"
+              kicker="Selection"
+              title="Small decisions, visible states."
+              description="Checkbox, radio, and switch controls sit in a dark specimen tray so selected and disabled states have more contrast."
+            >
+              <div className="grid gap-4 lg:grid-cols-3">
+                <Specimen
+                  title="Checkbox"
+                  command={`npx shadcn@latest add ${registryBase}/checkbox.json`}
+                  tone="dark"
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2 text-sm">
+                      <Checkbox
+                        aria-label="Selected"
+                        checked={checked}
+                        onCheckedChange={(value) => setChecked(value)}
+                      />
+                      Selected
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <Checkbox
+                        aria-label="Indeterminate"
+                        checked={tri}
+                        onCheckedChange={setTri}
+                      />
+                      Indeterminate
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-[hsl(var(--oc-text-400))]">
+                      <Checkbox aria-label="Disabled" disabled />
+                      Disabled
+                    </div>
                   </div>
                 </Specimen>
                 <Specimen
-                  title="Long form"
-                  command={`npx shadcn@latest add ${registryBase}/textarea.json`}
+                  title="Radio"
+                  command={`npx shadcn@latest add ${registryBase}/radio-group.json`}
+                  tone="dark"
                 >
-                  <Textarea
-                    placeholder="Write implementation notes..."
-                    defaultValue="Button variants should remain source-editable after install."
-                    rows={6}
-                  />
+                  <RadioGroup
+                    value={radio}
+                    onValueChange={setRadio}
+                    className="space-y-4"
+                  >
+                    <div className="flex items-center gap-2 text-sm">
+                      <RadioGroupItem aria-label="Teams" value="teams" />
+                      Teams
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <RadioGroupItem aria-label="Platform" value="platform" />
+                      Platform
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-[hsl(var(--oc-text-400))]">
+                      <RadioGroupItem aria-label="Archive" value="archive" disabled />
+                      Archive
+                    </div>
+                  </RadioGroup>
+                </Specimen>
+                <Specimen
+                  title="Switch"
+                  command={`npx shadcn@latest add ${registryBase}/switch.json`}
+                  tone="dark"
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between gap-4 text-sm">
+                      <span>Publish registry</span>
+                      <Switch
+                        aria-label="Publish registry"
+                        checked={on}
+                        onCheckedChange={setOn}
+                      />
+                    </div>
+                    <div className="flex items-center justify-between gap-4 text-sm">
+                      <span>Outlined mode</span>
+                      <Switch aria-label="Outlined mode" tone="outlined" defaultChecked />
+                    </div>
+                    <div className="flex items-center justify-between gap-4 text-sm text-[hsl(var(--oc-text-400))]">
+                      <span>Locked</span>
+                      <Switch aria-label="Locked" disabled />
+                    </div>
+                  </div>
                 </Specimen>
               </div>
-            </div>
-          </SpecSection>
+            </SpecSection>
 
-          <SpecSection
-            id="choices"
-            index="05"
-            kicker="Selection"
-            title="Small decisions, visible states."
-            description="Checkbox, radio, and switch controls sit in a dark specimen tray so selected and disabled states have more contrast."
-          >
-            <div className="grid gap-4 lg:grid-cols-3">
-              <Specimen
-                title="Checkbox"
-                command={`npx shadcn@latest add ${registryBase}/checkbox.json`}
-                tone="dark"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-sm">
-                    <Checkbox
-                      aria-label="Selected"
-                      checked={checked}
-                      onCheckedChange={(value) => setChecked(value)}
-                    />
-                    Selected
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <Checkbox
-                      aria-label="Indeterminate"
-                      checked={tri}
-                      onCheckedChange={setTri}
-                    />
-                    Indeterminate
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-[hsl(var(--oc-text-400))]">
-                    <Checkbox aria-label="Disabled" disabled />
-                    Disabled
-                  </div>
-                </div>
-              </Specimen>
-              <Specimen
-                title="Radio"
-                command={`npx shadcn@latest add ${registryBase}/radio-group.json`}
-                tone="dark"
-              >
-                <RadioGroup value={radio} onValueChange={setRadio} className="space-y-4">
-                  <div className="flex items-center gap-2 text-sm">
-                    <RadioGroupItem aria-label="Teams" value="teams" />
-                    Teams
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <RadioGroupItem aria-label="Platform" value="platform" />
-                    Platform
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-[hsl(var(--oc-text-400))]">
-                    <RadioGroupItem aria-label="Archive" value="archive" disabled />
-                    Archive
-                  </div>
-                </RadioGroup>
-              </Specimen>
-              <Specimen
-                title="Switch"
-                command={`npx shadcn@latest add ${registryBase}/switch.json`}
-                tone="dark"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between gap-4 text-sm">
-                    <span>Publish registry</span>
-                    <Switch
-                      aria-label="Publish registry"
-                      checked={on}
-                      onCheckedChange={setOn}
-                    />
-                  </div>
-                  <div className="flex items-center justify-between gap-4 text-sm">
-                    <span>Outlined mode</span>
-                    <Switch aria-label="Outlined mode" tone="outlined" defaultChecked />
-                  </div>
-                  <div className="flex items-center justify-between gap-4 text-sm text-[hsl(var(--oc-text-400))]">
-                    <span>Locked</span>
-                    <Switch aria-label="Locked" disabled />
-                  </div>
-                </div>
-              </Specimen>
-            </div>
-          </SpecSection>
-
-          <SpecSection
-            id="slider"
-            index="06"
-            kicker="Range"
-            title="A single control with room to breathe."
-            description="The slider gets a wide bench because range controls need visual space for motion, value, and hand feel."
-          >
-            <Specimen
-              title="Allocation"
-              command={`npx shadcn@latest add ${registryBase}/slider.json`}
-              tone="paper"
+            <SpecSection
+              id="slider"
+              index="06"
+              kicker="Range"
+              title="A single control with room to breathe."
+              description="The slider gets a wide bench because range controls need visual space for motion, value, and hand feel."
             >
-              <div className="max-w-3xl space-y-8 pt-8">
-                <Slider
-                  value={slider}
-                  onValueChange={setSlider}
-                  min={0}
-                  max={100}
-                  step={1}
-                  showValue
-                  formatValue={(value) => `${value}%`}
-                />
-                <div className="inline-flex border border-[hsl(var(--oc-text-900))] bg-white px-3 py-2 font-mono text-xs font-bold tabular-nums">
-                  CURRENT ALLOCATION: {slider[0]}%
-                </div>
-              </div>
-            </Specimen>
-          </SpecSection>
-
-          <SpecSection
-            id="select"
-            index="07"
-            kicker="Dropdown"
-            title="Select keeps the input grammar."
-            description="The dropdown trigger uses the same border behavior as the text fields, so forms stay systematic."
-          >
-            <Specimen
-              title="Trigger forms"
-              command={`npx shadcn@latest add ${registryBase}/select.json`}
-            >
-              <div className="grid gap-4 md:grid-cols-2">
-                <Select defaultValue="production">
-                  <SelectTrigger>
-                    <SelectValue placeholder="Environment" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="preview">Preview</SelectItem>
-                    <SelectItem value="staging">Staging</SelectItem>
-                    <SelectItem value="production">Production</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Select>
-                  <SelectTrigger shape="rounded">
-                    <SelectValue placeholder="Rounded shape" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="button">Button</SelectItem>
-                    <SelectItem value="input">Input</SelectItem>
-                    <SelectItem value="select">Select</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </Specimen>
-          </SpecSection>
-
-          <SpecSection
-            id="navigation"
-            index="08"
-            kicker="Navigation"
-            title="Movement primitives in one apparatus."
-            description="Tabs, breadcrumbs, and pagination are grouped as structural instruments, not scattered afterthoughts."
-          >
-            <div className="grid gap-4">
               <Specimen
-                title="Tabs"
-                command={`npx shadcn@latest add ${registryBase}/tabs.json`}
+                title="Allocation"
+                command={`npx shadcn@latest add ${registryBase}/slider.json`}
                 tone="paper"
               >
-                <Tabs defaultValue="overview">
-                  <TabsList>
-                    <TabsTrigger value="overview">Overview</TabsTrigger>
-                    <TabsTrigger value="settings">Settings</TabsTrigger>
-                    <TabsTrigger value="activity">Activity</TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="overview">
-                    <p className="text-sm text-[hsl(var(--oc-text-600))]">
-                      Active tabs use the blue action ramp while inactive tabs remain
-                      quiet until hover.
-                    </p>
-                  </TabsContent>
-                  <TabsContent value="settings">
-                    <p className="text-sm text-[hsl(var(--oc-text-600))]">
-                      Settings content stays visually connected to the active trigger.
-                    </p>
-                  </TabsContent>
-                  <TabsContent value="activity">
-                    <p className="text-sm text-[hsl(var(--oc-text-600))]">
-                      Activity content uses the same spacing rhythm.
-                    </p>
-                  </TabsContent>
-                </Tabs>
+                <div className="max-w-3xl space-y-8 pt-8">
+                  <Slider
+                    value={slider}
+                    onValueChange={setSlider}
+                    min={0}
+                    max={100}
+                    step={1}
+                    showValue
+                    formatValue={(value) => `${value}%`}
+                  />
+                  <div className="inline-flex border border-[hsl(var(--oc-text-900))] bg-white px-3 py-2 font-mono text-xs font-bold tabular-nums">
+                    CURRENT ALLOCATION: {slider[0]}%
+                  </div>
+                </div>
               </Specimen>
-              <div className="grid gap-4 xl:grid-cols-2">
-                <Specimen
-                  title="Breadcrumb"
-                  command={`npx shadcn@latest add ${registryBase}/breadcrumb.json`}
-                >
-                  <Breadcrumb>
-                    <BreadcrumbList>
-                      <BreadcrumbItem>
-                        <BreadcrumbLink href="#">Home</BreadcrumbLink>
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbItem>
-                        <BreadcrumbLink href="#">Library</BreadcrumbLink>
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbItem>
-                        <BreadcrumbPage>Components</BreadcrumbPage>
-                      </BreadcrumbItem>
-                    </BreadcrumbList>
-                  </Breadcrumb>
-                </Specimen>
-                <Specimen
-                  title="Pagination"
-                  command={`npx shadcn@latest add ${registryBase}/pagination.json`}
-                >
-                  <Pagination>
-                    <PaginationContent>
-                      <PaginationItem>
-                        <PaginationPrevious href="#" />
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink href="#" isActive>
-                          1
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink href="#">2</PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink href="#">3</PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationEllipsis />
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationNext href="#" />
-                      </PaginationItem>
-                    </PaginationContent>
-                  </Pagination>
-                </Specimen>
-              </div>
-            </div>
-          </SpecSection>
+            </SpecSection>
 
-          <SpecSection
-            id="tooltip"
-            index="09"
-            kicker="Guidance"
-            title="Tooltips as quiet annotations."
-            description="A final small primitive, staged as an annotation system rather than a loose hover demo."
-          >
-            <Specimen
-              title="Annotation targets"
-              command={`npx shadcn@latest add ${registryBase}/tooltip.json`}
-              tone="dark"
+            <SpecSection
+              id="select"
+              index="07"
+              kicker="Dropdown"
+              title="Select keeps the input grammar."
+              description="The dropdown trigger uses the same border behavior as the text fields, so forms stay systematic."
             >
-              <div className="flex flex-wrap items-center gap-4">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button variant="secondary" className="bg-[hsl(var(--oc-text-900))]">
-                      Hover me
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>I guide users through the product</TooltipContent>
-                </Tooltip>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button variant="text">Or me</Button>
-                  </TooltipTrigger>
-                  <TooltipContent side="right">Right-side tooltip</TooltipContent>
-                </Tooltip>
+              <Specimen
+                title="Trigger forms"
+                command={`npx shadcn@latest add ${registryBase}/select.json`}
+              >
+                <div className="grid gap-4 md:grid-cols-2">
+                  <Select defaultValue="production">
+                    <SelectTrigger>
+                      <SelectValue placeholder="Environment" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="preview">Preview</SelectItem>
+                      <SelectItem value="staging">Staging</SelectItem>
+                      <SelectItem value="production">Production</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Select>
+                    <SelectTrigger shape="rounded">
+                      <SelectValue placeholder="Rounded shape" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="button">Button</SelectItem>
+                      <SelectItem value="input">Input</SelectItem>
+                      <SelectItem value="select">Select</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </Specimen>
+            </SpecSection>
+
+            <SpecSection
+              id="navigation"
+              index="08"
+              kicker="Navigation"
+              title="Movement primitives in one apparatus."
+              description="Tabs, breadcrumbs, and pagination are grouped as structural instruments, not scattered afterthoughts."
+            >
+              <div className="grid gap-4">
+                <Specimen
+                  title="Tabs"
+                  command={`npx shadcn@latest add ${registryBase}/tabs.json`}
+                  tone="paper"
+                >
+                  <Tabs defaultValue="overview">
+                    <TabsList>
+                      <TabsTrigger value="overview">Overview</TabsTrigger>
+                      <TabsTrigger value="settings">Settings</TabsTrigger>
+                      <TabsTrigger value="activity">Activity</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="overview">
+                      <p className="text-sm text-[hsl(var(--oc-text-600))]">
+                        Active tabs use the blue action ramp while inactive tabs remain
+                        quiet until hover.
+                      </p>
+                    </TabsContent>
+                    <TabsContent value="settings">
+                      <p className="text-sm text-[hsl(var(--oc-text-600))]">
+                        Settings content stays visually connected to the active trigger.
+                      </p>
+                    </TabsContent>
+                    <TabsContent value="activity">
+                      <p className="text-sm text-[hsl(var(--oc-text-600))]">
+                        Activity content uses the same spacing rhythm.
+                      </p>
+                    </TabsContent>
+                  </Tabs>
+                </Specimen>
+                <div className="grid gap-4 xl:grid-cols-2">
+                  <Specimen
+                    title="Breadcrumb"
+                    command={`npx shadcn@latest add ${registryBase}/breadcrumb.json`}
+                  >
+                    <Breadcrumb>
+                      <BreadcrumbList>
+                        <BreadcrumbItem>
+                          <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                          <BreadcrumbLink href="#">Library</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                          <BreadcrumbPage>Components</BreadcrumbPage>
+                        </BreadcrumbItem>
+                      </BreadcrumbList>
+                    </Breadcrumb>
+                  </Specimen>
+                  <Specimen
+                    title="Pagination"
+                    command={`npx shadcn@latest add ${registryBase}/pagination.json`}
+                  >
+                    <Pagination>
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious href="#" />
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationLink href="#" isActive>
+                            1
+                          </PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationLink href="#">2</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationLink href="#">3</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationNext href="#" />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  </Specimen>
+                </div>
               </div>
-            </Specimen>
-          </SpecSection>
+            </SpecSection>
+
+            <SpecSection
+              id="tooltip"
+              index="09"
+              kicker="Guidance"
+              title="Tooltips as quiet annotations."
+              description="A final small primitive, staged as an annotation system rather than a loose hover demo."
+            >
+              <Specimen
+                title="Annotation targets"
+                command={`npx shadcn@latest add ${registryBase}/tooltip.json`}
+                tone="dark"
+              >
+                <div className="flex flex-wrap items-center gap-4">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="secondary"
+                        className="bg-[hsl(var(--oc-text-900))]"
+                      >
+                        Hover me
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>I guide users through the product</TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button variant="text">Or me</Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="right">Right-side tooltip</TooltipContent>
+                  </Tooltip>
+                </div>
+              </Specimen>
+            </SpecSection>
+          </main>
         </div>
       </div>
     </TooltipProvider>

@@ -39,6 +39,7 @@ body {
   font-family: var(--oc-font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  touch-action: manipulation;
 }
 
 :root {
@@ -54,4 +55,37 @@ h3 {
 
 p {
   text-wrap: pretty;
+}
+
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 50;
+  transform: translateY(-150%);
+  border: 1px solid hsl(var(--oc-text-900));
+  background: hsl(var(--oc-blue2-200));
+  padding: 0.75rem 1rem;
+  color: hsl(var(--oc-text-900));
+  font-weight: 800;
+  transition: transform 150ms ease-out;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid hsl(var(--oc-ring));
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  body {
+    scroll-behavior: auto;
+  }
+
+  a,
+  button,
+  [role="button"] {
+    transition-duration: 0.01ms;
+  }
 }
