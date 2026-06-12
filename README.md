@@ -1,20 +1,21 @@
 # Oceania
 
-Oceania is a registry-first design system for React, Next.js, and TypeScript.
-It follows the shadcn model: components are installed as editable source into
-the consuming app instead of being hidden inside an opaque package.
+Oceania is a small registry-first design system for React, Next.js, and
+TypeScript. It follows the shadcn model: install the components as editable
+source, keep the tokens with them, and change the code in your app when you
+need to.
 
-The repository contains the component source, design tokens, and a local
-registry app that publishes shadcn-compatible JSON files.
+The repo has three jobs: hold the component source, keep the design tokens in
+one place, and publish shadcn-compatible registry files from the docs app.
 
-## What's Included
+## What's In Here
 
 - React components built with TypeScript, Radix primitives, Tailwind CSS, and CVA
 - Figma-sourced CSS tokens for color, typography, radii, and control sizing
 - A Next.js registry/docs app for previewing components and installing them with shadcn
 - Verification notes for fresh installs and browser QA
 
-Current registry components:
+Current components:
 
 - Button
 - Input and InputField
@@ -41,7 +42,7 @@ Current registry components:
 - Node.js 20 or newer
 - pnpm 10.33.0, as declared by `packageManager`
 
-## Develop
+## Develop Locally
 
 ```bash
 pnpm install
@@ -56,7 +57,7 @@ To run only the registry app:
 pnpm --filter @oceania/registry dev
 ```
 
-## Build The Registry
+## Build the Registry
 
 Registry files are generated into `apps/registry/public/r`.
 
@@ -64,11 +65,13 @@ Registry files are generated into `apps/registry/public/r`.
 pnpm registry:build
 ```
 
-By default, generated install URLs point at `http://localhost:3333/r`. Set
-`OCEANIA_REGISTRY_URL` when building for another host:
+By default, generated registry dependencies point at hosted JSON files like
+`https://oceania.praks.me/r/button.json`.
+
+For a local-only build, or for another host, set `OCEANIA_REGISTRY_URL`:
 
 ```bash
-OCEANIA_REGISTRY_URL=https://example.com/r pnpm registry:build
+OCEANIA_REGISTRY_URL=<origin>/r pnpm registry:build
 ```
 
 ## Verify Changes
@@ -91,7 +94,17 @@ Fresh install and browser QA notes are documented in:
 - `docs/verification/fresh-install.md`
 - `docs/verification/browser-qa.md`
 
-## Install From The Registry
+## Install from the Registry
+
+Use the hosted registry when you just want to install something:
+
+```bash
+npx shadcn@latest add https://oceania.praks.me/r/button.json
+npx shadcn@latest add https://oceania.praks.me/r/input.json
+npx shadcn@latest add https://oceania.praks.me/r/select.json
+```
+
+When you are working against the local docs app, use localhost instead:
 
 ```bash
 npx shadcn@latest add http://localhost:3333/r/button.json
@@ -99,8 +112,8 @@ npx shadcn@latest add http://localhost:3333/r/input.json
 npx shadcn@latest add http://localhost:3333/r/select.json
 ```
 
-Components depend on the Oceania token file. If the CLI does not import it
-automatically, add this to the consuming app's global CSS:
+Components depend on the Oceania token file. If the CLI does not wire it into
+your app automatically, add this to the consuming app's global CSS:
 
 ```css
 @import "./oceania-tokens.css";
@@ -109,8 +122,8 @@ automatically, add this to the consuming app's global CSS:
 You can also install the shared utility and tokens directly:
 
 ```bash
-npx shadcn@latest add http://localhost:3333/r/utils.json
-npx shadcn@latest add http://localhost:3333/r/tokens.json
+npx shadcn@latest add https://oceania.praks.me/r/utils.json
+npx shadcn@latest add https://oceania.praks.me/r/tokens.json
 ```
 
 ## Package Exports
@@ -142,6 +155,6 @@ import { Button } from "@oceania/ui/components/button";
 
 ## Design System References
 
-The implementation is guided by shadcn registries, Radix primitives, Tailwind v4
-theme variables, and mature component docs patterns. Notes live in
-`docs/research/design-system-benchmarks.md`.
+The implementation leans on shadcn registries, Radix primitives, Tailwind v4
+theme variables, and component docs patterns that have held up in real projects.
+Notes live in `docs/research/design-system-benchmarks.md`.
