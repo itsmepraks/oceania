@@ -214,18 +214,35 @@ function TokenSwatch({
   );
 }
 
-function LabHero({ hostLabel }: { hostLabel: string }) {
+function FileRow({ path, label }: { path: string; label: string }) {
+  return (
+    <div className="grid gap-1 border border-[hsl(var(--oc-light))] p-3 sm:grid-cols-[minmax(0,1fr)_120px] sm:items-center">
+      <code className="min-w-0 overflow-x-auto whitespace-nowrap font-mono text-xs text-[hsl(var(--oc-blue2-200))]">
+        {path}
+      </code>
+      <p className="text-xs text-[hsl(var(--oc-text-200))] sm:text-right">{label}</p>
+    </div>
+  );
+}
+
+function LabHero({
+  hostLabel,
+  registryBase,
+}: {
+  hostLabel: string;
+  registryBase: string;
+}) {
   return (
     <section
       id="overview"
       className="scroll-mt-8 border-b border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-primary-50))]"
     >
-      <div className="grid min-h-[760px] lg:grid-cols-[154px_minmax(0,1fr)]">
+      <div className="grid lg:grid-cols-[154px_minmax(0,1fr)]">
         <div className="hidden border-r border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-text-900))] text-[hsl(var(--oc-primary-50))] lg:block">
-          <div className="sticky top-0 flex h-screen flex-col justify-between p-4">
+          <div className="sticky top-0 flex min-h-[620px] flex-col justify-between p-4">
             <div>
               <p className="font-mono text-xs text-[hsl(var(--oc-blue2-200))]">OCN-00</p>
-              <p className="mt-3 text-sm font-bold uppercase">Registry lab</p>
+              <p className="mt-3 text-sm font-bold uppercase">Component registry</p>
             </div>
             <p className="[writing-mode:vertical-rl] font-mono text-xs uppercase text-[hsl(var(--oc-text-300))]">
               source files / design tokens / react
@@ -237,21 +254,30 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
           <div className="absolute right-4 top-4 hidden border border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-blue2-200))] px-3 py-2 font-mono text-xs font-bold text-[hsl(var(--oc-text-900))] sm:block">
             {hostLabel}
           </div>
-          <div className="grid gap-8 px-4 py-10 sm:px-6 lg:px-10 lg:py-16 2xl:grid-cols-[minmax(0,0.56fr)_minmax(440px,0.44fr)]">
+          <div className="grid gap-8 px-4 py-8 sm:px-6 lg:px-10 lg:py-10 xl:grid-cols-[minmax(0,0.54fr)_minmax(420px,0.46fr)]">
             <div className="min-w-0">
-              <div className="mb-8 inline-flex border border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-text-900))] px-3 py-2 font-mono text-xs font-bold uppercase text-[hsl(var(--oc-primary-50))]">
-                shadcn registry / editable source
+              <div className="mb-6 inline-flex border border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-text-900))] px-3 py-2 font-mono text-xs font-bold uppercase text-[hsl(var(--oc-primary-50))]">
+                shadcn-compatible registry
               </div>
-              <h1 className="max-w-full text-[clamp(4.25rem,13vw,9.5rem)] font-bold leading-[0.82] text-[hsl(var(--oc-text-900))]">
+              <h1 className="max-w-full text-[clamp(4.25rem,11vw,8.25rem)] font-bold leading-[0.84] text-[hsl(var(--oc-text-900))]">
                 Oceania
               </h1>
-              <p className="mt-7 max-w-2xl text-xl leading-8 text-[hsl(var(--oc-text-800))]">
-                Copy the component source into your app, keep the Oceania tokens with it,
-                and change whatever you need. No wrapper package. No locked theme.
+              <p className="mt-6 max-w-2xl text-xl leading-8 text-[hsl(var(--oc-text-800))]">
+                A React component registry with design tokens included. Install editable
+                source with the shadcn CLI, keep the files in your app, and tune the
+                system from CSS variables.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-6 max-w-3xl border border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-text-900))] p-3 shadow-[6px_6px_0_hsl(var(--oc-blue2-200))]">
+                <p className="mb-2 font-mono text-[11px] font-bold uppercase text-[hsl(var(--oc-blue2-200))]">
+                  install one component
+                </p>
+                <code className="block overflow-x-auto whitespace-nowrap font-mono text-sm text-[hsl(var(--oc-primary-50))]">
+                  npx shadcn@latest add {registryBase}/button.json
+                </code>
+              </div>
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Button asChild className="shadow-[6px_6px_0_hsl(var(--oc-text-900))]">
-                  <a href="#install">Install a component</a>
+                  <a href="#install">Start with the CLI</a>
                 </Button>
                 <Button
                   asChild
@@ -261,102 +287,78 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
                   <a href="#button">Browse components</a>
                 </Button>
               </div>
-              <div className="mt-10 grid max-w-2xl grid-cols-3 border border-[hsl(var(--oc-text-900))] bg-white">
-                {[
-                  ["12", "UI components"],
-                  ["02", "Token files"],
-                  ["14", "JSON entries"],
-                ].map(([value, label], index) => (
-                  <div
-                    key={label}
-                    className={
-                      index < 2 ? "border-r border-[hsl(var(--oc-text-900))] p-4" : "p-4"
-                    }
-                  >
-                    <p className="font-mono text-3xl font-bold tabular-nums text-[hsl(var(--oc-text-900))]">
-                      {value}
-                    </p>
-                    <p className="mt-1 text-xs uppercase text-[hsl(var(--oc-text-600))]">
-                      {label}
-                    </p>
-                  </div>
-                ))}
-              </div>
             </div>
 
-            <div className="relative min-w-0 2xl:pt-24">
-              <Specimen title="Live specimen" tone="dark">
-                <div className="grid gap-5">
+            <div className="relative min-w-0 xl:pt-6">
+              <Specimen title="What the CLI writes" tone="dark">
+                <div className="space-y-3">
+                  <FileRow path="components/ui/button.tsx" label="editable source" />
+                  <FileRow path="app/oceania-tokens.css" label="design tokens" />
+                  <FileRow path="lib/utils.ts" label="shared helper" />
                   <div className="border border-[hsl(var(--oc-light))] bg-[hsl(var(--oc-primary-50))] p-4 text-[hsl(var(--oc-text-900))]">
-                    <p className="font-mono text-xs uppercase text-[hsl(var(--oc-blue1-700))]">
-                      install preview
+                    <p className="font-mono text-xs font-bold uppercase text-[hsl(var(--oc-blue1-700))]">
+                      token-driven output
                     </p>
-                    <h2 className="mt-2 text-2xl font-semibold">
-                      Add the file. Own the code.
-                    </h2>
-                    <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_150px]">
-                      <Input defaultValue="components/ui/button.tsx" />
-                      <Button size="sm">Add Button</Button>
-                    </div>
+                    <p className="mt-2 text-sm leading-6 text-[hsl(var(--oc-text-800))]">
+                      Components keep their Radix behavior and read Oceania variables for
+                      color, radius, typography, and state.
+                    </p>
                   </div>
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    {[
-                      ["Tokens", "HSL"],
-                      ["Runtime", "React"],
-                      ["Delivery", "CLI"],
-                    ].map(([label, value]) => (
-                      <div
-                        key={label}
-                        className="border border-[hsl(var(--oc-light))] p-3"
-                      >
-                        <p className="text-xs text-[hsl(var(--oc-text-200))]">{label}</p>
-                        <p className="mt-1 text-2xl font-semibold tabular-nums">
-                          {value}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                  <Tabs defaultValue="preview">
-                    <TabsList>
-                      <TabsTrigger
-                        value="preview"
-                        className="data-[state=active]:text-[hsl(var(--oc-blue2-200))] data-[state=active]:after:bg-[hsl(var(--oc-blue2-200))]"
-                      >
-                        Preview
-                      </TabsTrigger>
-                      <TabsTrigger
-                        value="code"
-                        className="data-[state=active]:text-[hsl(var(--oc-blue2-200))] data-[state=active]:after:bg-[hsl(var(--oc-blue2-200))]"
-                      >
-                        Code
-                      </TabsTrigger>
-                      <TabsTrigger
-                        value="tokens"
-                        className="data-[state=active]:text-[hsl(var(--oc-blue2-200))] data-[state=active]:after:bg-[hsl(var(--oc-blue2-200))]"
-                      >
-                        Tokens
-                      </TabsTrigger>
-                    </TabsList>
-                    <TabsContent value="preview">
-                      <p className="text-sm text-[hsl(var(--oc-text-200))]">
-                        Real controls, rendered from the same source the registry ships.
-                      </p>
-                    </TabsContent>
-                    <TabsContent value="code">
-                      <p className="font-mono text-xs text-[hsl(var(--oc-blue2-200))]">
-                        npx shadcn@latest add ...
-                      </p>
-                    </TabsContent>
-                    <TabsContent value="tokens">
-                      <p className="text-sm text-[hsl(var(--oc-text-200))]">
-                        Import the token file once, then use the components anywhere.
-                      </p>
-                    </TabsContent>
-                  </Tabs>
                 </div>
               </Specimen>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HowItWorks() {
+  return (
+    <section className="border-b border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-primary-50))]">
+      <div className="grid lg:grid-cols-[154px_minmax(0,1fr)]">
+        <div className="hidden border-r border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-blue2-200))] p-4 lg:block">
+          <p className="font-mono text-xs font-bold text-[hsl(var(--oc-blue1-700))]">
+            OCN-01
+          </p>
+          <p className="mt-3 text-sm font-bold uppercase text-[hsl(var(--oc-text-900))]">
+            How it works
+          </p>
+        </div>
+        <div className="grid border-t border-[hsl(var(--oc-text-900))] bg-white sm:grid-cols-3 lg:border-t-0">
+          {[
+            ["01", "Run the CLI", "Use the same shadcn add flow you already know."],
+            [
+              "02",
+              "Keep the files",
+              "React components land in your repo as editable source.",
+            ],
+            [
+              "03",
+              "Tune the tokens",
+              "Change CSS variables once and the components follow.",
+            ],
+          ].map(([step, title, body], index) => (
+            <div
+              key={step}
+              className={
+                index < 2
+                  ? "border-b border-[hsl(var(--oc-text-900))] p-5 sm:border-b-0 sm:border-r"
+                  : "p-5"
+              }
+            >
+              <p className="font-mono text-xs font-bold text-[hsl(var(--oc-blue1-700))]">
+                {step}
+              </p>
+              <h2 className="mt-4 text-2xl font-semibold leading-tight text-[hsl(var(--oc-text-900))]">
+                {title}
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-[hsl(var(--oc-text-600))]">
+                {body}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -450,27 +452,28 @@ export default function HomePage() {
           </div>
 
           <main id="main-content" tabIndex={-1} className="focus:outline-none">
-            <LabHero hostLabel={hostLabel} />
+            <LabHero hostLabel={hostLabel} registryBase={registryBase} />
+            <HowItWorks />
 
             <SpecSection
               id="install"
               index="01"
               kicker="Install"
-              title="Install only the pieces you need."
-              description="Each command pulls editable source into your app. The components stay close to your codebase, not hidden in a package."
+              title="Use it like a shadcn registry."
+              description="Pick a component, run the CLI command, and the source lands in your project. There is no runtime package to wrap or theme API to learn first."
             >
               <div className="grid gap-4 xl:grid-cols-[minmax(0,0.65fr)_minmax(280px,0.35fr)]">
                 <Specimen title="Install from the registry" tone="dark">
                   <div className="space-y-3">
-                    <CopyLine>pnpm install</CopyLine>
-                    <CopyLine>pnpm --filter @oceania/registry dev</CopyLine>
                     <CopyLine>npx shadcn@latest add {registryBase}/button.json</CopyLine>
+                    <CopyLine>npx shadcn@latest add {registryBase}/input.json</CopyLine>
+                    <CopyLine>npx shadcn@latest add {registryBase}/select.json</CopyLine>
                   </div>
                 </Specimen>
                 <Specimen title="One token import" tone="paper">
                   <p className="text-sm leading-6 text-[hsl(var(--oc-text-800))]">
-                    The registry includes the token file. If your app does not import it
-                    automatically, add it once in global CSS.
+                    Oceania ships the token file with each component dependency. If your
+                    app does not import it automatically, add it once in global CSS.
                   </p>
                   <div className="mt-4">
                     <CopyLine>@import "./oceania-tokens.css";</CopyLine>
@@ -490,8 +493,8 @@ export default function HomePage() {
               id="tokens"
               index="02"
               kicker="Tokens"
-              title="The look lives in CSS variables."
-              description="Colors, type, radii, and control sizing are named tokens. Change the system in one place instead of chasing component overrides."
+              title="The design system is in the tokens."
+              description="The components use the same CSS variables for color, typography, radius, spacing, and state. Change the variables and the installed source follows."
             >
               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                 {tokenSwatches.map(([name, token, usage]) => (
@@ -504,8 +507,8 @@ export default function HomePage() {
               id="button"
               index="03"
               kicker="Actions"
-              title="Buttons cover the everyday cases."
-              description="Primary, secondary, text, lite, destructive, disabled, size, and radius states are all visible before you install."
+              title="Start with the everyday controls."
+              description="Buttons, inputs, choices, navigation, and tooltips are shown as working React components so you can judge the states before installing them."
             >
               <div className="grid gap-4 xl:grid-cols-[minmax(0,0.58fr)_minmax(0,0.42fr)]">
                 <Specimen
