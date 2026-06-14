@@ -80,12 +80,12 @@ const installItems = [
 ];
 
 const tokenSwatches = [
-  ["Action", "--oc-primary", "Command color"],
-  ["Active", "--oc-primary-active", "Pressed state"],
-  ["Ink", "--oc-text-900", "Primary copy"],
-  ["Signal", "--oc-error-500", "Exception state"],
-  ["Wash", "--oc-primary-50", "Soft field"],
-  ["Caption", "--oc-text-500", "Secondary copy"],
+  ["Action", "--oc-primary", "Primary action"],
+  ["Pressed", "--oc-primary-active", "Active state"],
+  ["Ink", "--oc-text-900", "Main text"],
+  ["Error", "--oc-error-500", "Error state"],
+  ["Wash", "--oc-primary-50", "Page surface"],
+  ["Caption", "--oc-text-500", "Support text"],
 ] as const;
 
 function preventDemoNavigation(event: React.MouseEvent<HTMLAnchorElement>) {
@@ -228,7 +228,7 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
               <p className="mt-3 text-sm font-bold uppercase">Registry lab</p>
             </div>
             <p className="[writing-mode:vertical-rl] font-mono text-xs uppercase text-[hsl(var(--oc-text-300))]">
-              editable source / controlled tokens / react
+              source files / design tokens / react
             </p>
           </div>
         </div>
@@ -240,33 +240,32 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
           <div className="grid gap-8 px-4 py-10 sm:px-6 lg:px-10 lg:py-16 2xl:grid-cols-[minmax(0,0.56fr)_minmax(440px,0.44fr)]">
             <div className="min-w-0">
               <div className="mb-8 inline-flex border border-[hsl(var(--oc-text-900))] bg-[hsl(var(--oc-text-900))] px-3 py-2 font-mono text-xs font-bold uppercase text-[hsl(var(--oc-primary-50))]">
-                shadcn registry / source-owned UI
+                shadcn registry / editable source
               </div>
               <h1 className="max-w-full text-[clamp(4.25rem,13vw,9.5rem)] font-bold leading-[0.82] text-[hsl(var(--oc-text-900))]">
                 Oceania
               </h1>
               <p className="mt-7 max-w-2xl text-xl leading-8 text-[hsl(var(--oc-text-800))]">
-                A component registry dressed like a specimen catalog. Install editable
-                React source, keep the Figma token grammar, and inspect every primitive
-                while the registry stays fast to scan.
+                Copy the component source into your app, keep the Oceania tokens with it,
+                and change whatever you need. No wrapper package. No locked theme.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button asChild className="shadow-[6px_6px_0_hsl(var(--oc-text-900))]">
-                  <a href="#install">Start installing</a>
+                  <a href="#install">Install a component</a>
                 </Button>
                 <Button
                   asChild
                   variant="secondary"
                   className="bg-[hsl(var(--oc-primary-50))]"
                 >
-                  <a href="#button">Inspect specimens</a>
+                  <a href="#button">Browse components</a>
                 </Button>
               </div>
               <div className="mt-10 grid max-w-2xl grid-cols-3 border border-[hsl(var(--oc-text-900))] bg-white">
                 {[
                   ["12", "UI components"],
-                  ["02", "Shared assets"],
-                  ["14", "Registry files"],
+                  ["02", "Token files"],
+                  ["14", "JSON entries"],
                 ].map(([value, label], index) => (
                   <div
                     key={label}
@@ -290,10 +289,10 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
                 <div className="grid gap-5">
                   <div className="border border-[hsl(var(--oc-light))] bg-[hsl(var(--oc-primary-50))] p-4 text-[hsl(var(--oc-text-900))]">
                     <p className="font-mono text-xs uppercase text-[hsl(var(--oc-blue1-700))]">
-                      registry receipt
+                      install preview
                     </p>
                     <h2 className="mt-2 text-2xl font-semibold">
-                      Install the source. Keep the system.
+                      Add the file. Own the code.
                     </h2>
                     <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_150px]">
                       <Input defaultValue="components/ui/button.tsx" />
@@ -304,7 +303,7 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
                     {[
                       ["Tokens", "HSL"],
                       ["Runtime", "React"],
-                      ["Install", "CLI"],
+                      ["Delivery", "CLI"],
                     ].map(([label, value]) => (
                       <div
                         key={label}
@@ -340,7 +339,7 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
                     </TabsList>
                     <TabsContent value="preview">
                       <p className="text-sm text-[hsl(var(--oc-text-200))]">
-                        Controls are shown as working specimens, not screenshots.
+                        Real controls, rendered from the same source the registry ships.
                       </p>
                     </TabsContent>
                     <TabsContent value="code">
@@ -350,7 +349,7 @@ function LabHero({ hostLabel }: { hostLabel: string }) {
                     </TabsContent>
                     <TabsContent value="tokens">
                       <p className="text-sm text-[hsl(var(--oc-text-200))]">
-                        Import oceania-tokens.css once in global CSS.
+                        Import the token file once, then use the components anywhere.
                       </p>
                     </TabsContent>
                   </Tabs>
@@ -457,21 +456,21 @@ export default function HomePage() {
               id="install"
               index="01"
               kicker="Install"
-              title="A registry page should feel operational."
-              description="The install flow stays direct, with commands framed as part of the same token-backed system rather than generic docs filler."
+              title="Install only the pieces you need."
+              description="Each command pulls editable source into your app. The components stay close to your codebase, not hidden in a package."
             >
               <div className="grid gap-4 xl:grid-cols-[minmax(0,0.65fr)_minmax(280px,0.35fr)]">
-                <Specimen title="Quick start" tone="dark">
+                <Specimen title="Install from the registry" tone="dark">
                   <div className="space-y-3">
                     <CopyLine>pnpm install</CopyLine>
                     <CopyLine>pnpm --filter @oceania/registry dev</CopyLine>
                     <CopyLine>npx shadcn@latest add {registryBase}/button.json</CopyLine>
                   </div>
                 </Specimen>
-                <Specimen title="Token import" tone="paper">
+                <Specimen title="One token import" tone="paper">
                   <p className="text-sm leading-6 text-[hsl(var(--oc-text-800))]">
-                    If the CLI does not add the token file automatically, import it from
-                    the consuming app global stylesheet.
+                    The registry includes the token file. If your app does not import it
+                    automatically, add it once in global CSS.
                   </p>
                   <div className="mt-4">
                     <CopyLine>@import "./oceania-tokens.css";</CopyLine>
@@ -491,8 +490,8 @@ export default function HomePage() {
               id="tokens"
               index="02"
               kicker="Tokens"
-              title="Palette as evidence, not decoration."
-              description="The token strip is intentionally blunt: names, variables, and usage hints, all pulled from the Oceania palette."
+              title="The look lives in CSS variables."
+              description="Colors, type, radii, and control sizing are named tokens. Change the system in one place instead of chasing component overrides."
             >
               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                 {tokenSwatches.map(([name, token, usage]) => (
@@ -505,12 +504,12 @@ export default function HomePage() {
               id="button"
               index="03"
               kicker="Actions"
-              title="Buttons staged like control samples."
-              description="The actions are still simple and source-editable, but the page gives them a stronger frame."
+              title="Buttons cover the everyday cases."
+              description="Primary, secondary, text, lite, destructive, disabled, size, and radius states are all visible before you install."
             >
               <div className="grid gap-4 xl:grid-cols-[minmax(0,0.58fr)_minmax(0,0.42fr)]">
                 <Specimen
-                  title="Variant run"
+                  title="Variants"
                   command={`npx shadcn@latest add ${registryBase}/button.json`}
                 >
                   <div className="flex flex-wrap gap-3">
@@ -521,7 +520,7 @@ export default function HomePage() {
                     <Button variant="destructive">Destructive</Button>
                   </div>
                 </Specimen>
-                <Specimen title="Scale and radius" tone="paper">
+                <Specimen title="Size and shape" tone="paper">
                   <div className="flex flex-wrap items-center gap-3">
                     <Button size="lg">Large</Button>
                     <Button size="md">Medium</Button>
@@ -539,12 +538,12 @@ export default function HomePage() {
               id="inputs"
               index="04"
               kicker="Forms"
-              title="Forms get the full inspection table."
-              description="Shapes, failure states, captions, and longer text entry are staged together so their border grammar can be compared quickly."
+              title="Form controls share one border language."
+              description="Inputs, field copy, errors, disabled states, and textareas use the same token set so forms do not drift."
             >
               <div className="grid gap-4">
                 <Specimen
-                  title="Shape matrix"
+                  title="Shapes and states"
                   command={`npx shadcn@latest add ${registryBase}/input.json`}
                 >
                   <div className="grid gap-6 md:grid-cols-3">
@@ -575,7 +574,7 @@ export default function HomePage() {
                   </div>
                 </Specimen>
                 <div className="grid gap-4 xl:grid-cols-2">
-                  <Specimen title="Field copy" tone="paper">
+                  <Specimen title="Labels and help text" tone="paper">
                     <div className="grid gap-4">
                       <InputField
                         label="Email"
@@ -591,7 +590,7 @@ export default function HomePage() {
                     </div>
                   </Specimen>
                   <Specimen
-                    title="Long form"
+                    title="Textarea"
                     command={`npx shadcn@latest add ${registryBase}/textarea.json`}
                   >
                     <Textarea
@@ -608,8 +607,8 @@ export default function HomePage() {
               id="choices"
               index="05"
               kicker="Selection"
-              title="Small decisions, visible states."
-              description="Checkbox, radio, and switch controls sit in a dark specimen tray so selected and disabled states have more contrast."
+              title="Selection states are easy to scan."
+              description="Checkboxes, radio buttons, and switches show selected, mixed, disabled, and outlined states without leaving the page."
             >
               <div className="grid gap-4 lg:grid-cols-3">
                 <Specimen
@@ -695,8 +694,8 @@ export default function HomePage() {
               id="slider"
               index="06"
               kicker="Range"
-              title="A single control with room to breathe."
-              description="The slider gets a wide bench because range controls need visual space for motion, value, and hand feel."
+              title="Range input with visible feedback."
+              description="The slider exposes the current value while you drag, with enough space for the thumb, track, and value label to read clearly."
             >
               <Specimen
                 title="Allocation"
@@ -724,11 +723,11 @@ export default function HomePage() {
               id="select"
               index="07"
               kicker="Dropdown"
-              title="Select keeps the input grammar."
-              description="The dropdown trigger uses the same border behavior as the text fields, so forms stay systematic."
+              title="Select follows the same form rules."
+              description="Triggers, placeholders, selected items, and menu options use the same typography and borders as the other inputs."
             >
               <Specimen
-                title="Trigger forms"
+                title="Select examples"
                 command={`npx shadcn@latest add ${registryBase}/select.json`}
               >
                 <div className="grid gap-4 md:grid-cols-2">
@@ -760,8 +759,8 @@ export default function HomePage() {
               id="navigation"
               index="08"
               kicker="Navigation"
-              title="Movement primitives in one apparatus."
-              description="Tabs, breadcrumbs, and pagination are grouped as structural instruments, not scattered afterthoughts."
+              title="Navigation primitives are included."
+              description="Tabs, breadcrumbs, and pagination are small pieces, but they need keyboard behavior, focus states, and clear active styles."
             >
               <div className="grid gap-4">
                 <Specimen
@@ -777,18 +776,18 @@ export default function HomePage() {
                     </TabsList>
                     <TabsContent value="overview">
                       <p className="text-sm text-[hsl(var(--oc-text-600))]">
-                        Active tabs use the blue action ramp while inactive tabs remain
-                        quiet until hover.
+                        Active tabs use the action color. Inactive tabs stay quiet until
+                        hover or focus.
                       </p>
                     </TabsContent>
                     <TabsContent value="settings">
                       <p className="text-sm text-[hsl(var(--oc-text-600))]">
-                        Settings content stays visually connected to the active trigger.
+                        Tab content stays tied to the selected trigger.
                       </p>
                     </TabsContent>
                     <TabsContent value="activity">
                       <p className="text-sm text-[hsl(var(--oc-text-600))]">
-                        Activity content uses the same spacing rhythm.
+                        Spacing stays consistent when the panel changes.
                       </p>
                     </TabsContent>
                   </Tabs>
@@ -881,11 +880,11 @@ export default function HomePage() {
               id="tooltip"
               index="09"
               kicker="Guidance"
-              title="Tooltips as quiet annotations."
-              description="A final small primitive, staged as an annotation system rather than a loose hover demo."
+              title="Tooltips stay out of the way."
+              description="Use them for short hints on controls that need a little context. The trigger still works without the tooltip."
             >
               <Specimen
-                title="Annotation targets"
+                title="Tooltip examples"
                 command={`npx shadcn@latest add ${registryBase}/tooltip.json`}
                 tone="dark"
               >
@@ -899,13 +898,13 @@ export default function HomePage() {
                         Hover me
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>I guide users through the product</TooltipContent>
+                    <TooltipContent>Short hint, close to the control</TooltipContent>
                   </Tooltip>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button variant="text">Or me</Button>
                     </TooltipTrigger>
-                    <TooltipContent side="right">Right-side tooltip</TooltipContent>
+                    <TooltipContent side="right">Shown on the right</TooltipContent>
                   </Tooltip>
                 </div>
               </Specimen>
