@@ -2,6 +2,13 @@
   "name": "oceania",
   "private": true,
   "version": "0.0.0",
+  "description": "A shadcn-compatible React component registry with design tokens included.",
+  "license": "MIT",
+  "homepage": "https://oceania.praks.me",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsmepraks/oceania.git"
+  },
   "packageManager": "pnpm@10.33.0",
   "scripts": {
     "build": "turbo run build",

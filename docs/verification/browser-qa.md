@@ -4,7 +4,8 @@ Date checked: 2026-06-10
 
 ## Registry Docs
 
-Target: `http://localhost:3333`
+Local target: `http://localhost:3333`
+Hosted target: `https://oceania.praks.me`
 
 Desktop check:
 
@@ -21,5 +22,6 @@ Mobile check:
 
 ## Notes
 
-Running `next build` while `next dev` is active can leave the dev server with stale
-`.next` artifacts. Restart the dev server after production builds before visual QA.
+Do not run `next build` and `next dev` against the same app at the same time.
+They both write to `.next`, and the dev server can end up serving stale build
+artifacts. Stop or restart the dev server after production builds before visual QA.

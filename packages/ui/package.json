@@ -2,6 +2,8 @@
   "name": "@oceania/ui",
   "version": "0.0.1",
   "private": true,
+  "description": "Source components and tokens for the Oceania registry.",
+  "license": "MIT",
   "type": "module",
   "sideEffects": [
     "**/*.css"
